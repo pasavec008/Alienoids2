@@ -8,7 +8,7 @@ class PlayerShip{
     rotation = 0;
     rotationRadians;
     rotationSpeed = 5;
-    speed = 0.2;
+    speed = 0.15;
     passiveSlowSpeed = 50;
     health;
     shield;
@@ -39,6 +39,10 @@ class PlayerShip{
             this.rotation += 360;
 
         if(controller.keys[38]){//up
+
+            //zmazat potom
+            model.player.money++;
+
             this.rotationRadians = this.rotation * Math.PI / 180.0;
             this.dy -= Math.cos(this.rotationRadians) * this.speed;
             this.dx += Math.sin(this.rotationRadians) * this.speed;
@@ -50,7 +54,7 @@ class PlayerShip{
         //edges of map
         if(this.x < 0 || this.x + this.xSize > screen.width)
             this.dx *= -1.25;
-        if(this.y < 0 || this.y + this.ySize > screen.height)
+        if(this.y < 0 || this.y + this.ySize > screen.height * 0.85)
             this.dy *= -1.25;
     }
 

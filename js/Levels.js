@@ -9,5 +9,6 @@ class Levels{
 
         model.playerShip = new PlayerShip(1);
         model.objects_2.push(new Wallpaper(1));
+        model.objects_2.push(new Hud());
     }
 }
