@@ -5,8 +5,8 @@ class Asteroid{
     size = Math.random() * 200 + 50;
     xSize = screen.width / 1920 * this.size;
     ySize = screen.height / 1080 * this.size;
-    dx = (260 - this.size) / 100 + 0.2;
-    dy = (260 - this.size) / 100 + 0.2;
+    dx = (300 - this.size) / 150;
+    dy = (300 - this.size) / 150;
     rotation = 0;
     rotationSpeed = (260 - this.size) / 150;
 
@@ -27,7 +27,7 @@ class Asteroid{
             this.y = Math.random() * screen.height;
         }
 
-        this.texture.src = "textures/enemies/aste1.png";
+        this.texture.src = "textures/enemies/aste" + Math.floor(Math.random()*3 + 1) + ".png";
     }
 
     draw(context){

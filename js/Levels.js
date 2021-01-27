@@ -6,7 +6,7 @@ class Levels{
         model.objects_2 = [];
         model.objects_3 = [];
         model.objects_4 = [];
-        model.maxEnemies = 50;
+        model.maxEnemies = 1000;
 
         model.playerShip = new PlayerShip(1);
         model.objects_2.push(new Wallpaper(1));
