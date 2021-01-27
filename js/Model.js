@@ -19,6 +19,19 @@ class Model{
         this.player = new Player();
     }
 
+    collision(object1, object2){
+        var centre1X = object1.x + object1.xSize / 2;
+        var centre1Y = object1.y + object1.ySize / 2;
+        var centre2X = object2.x + object2.xSize / 2;
+        var centre2Y = object2.y + object2.ySize / 2;
+
+        var distance = Math.sqrt((centre1X - centre2X) * (centre1X - centre2X) + (centre1Y - centre2Y) * (centre1Y - centre2Y));
+    
+        if (distance <= object1.collisionSize / 2 + object2.collisionSize / 2)
+            return 1;
+        return 0;
+    }
+
     modelLoop(controller){
         if(this.mode == 1){
             for(var i = 0; i < this.objects_1.length; i++){
@@ -41,11 +54,13 @@ class Model{
                 this.objects_5[i].change(controller, this);
             }
 
+            for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
+                if(this.collision(this.playerShip, this.objects_3[i]))
+                    this.objects_3.splice(i, 1);
+            }
+
             this.view.viewLoop(this.objects_2, this.objects_3, this.objects_4, this.objects_5, this.playerShip, this.maxEnemies);
         }
             
-
-
-        
     }
 }

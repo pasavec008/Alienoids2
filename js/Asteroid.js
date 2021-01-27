@@ -3,6 +3,7 @@ class Asteroid{
     x;
     y;
     size = Math.random() * 200 + 50;
+    collisionSize = this.size * 0.9;
     xSize = screen.width / 1920 * this.size;
     ySize = screen.height / 1080 * this.size;
     dx = (300 - this.size) / 150;

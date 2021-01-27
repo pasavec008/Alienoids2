@@ -3,6 +3,7 @@ class PlayerShip{
     y = screen.height / 2;
     xSize = screen.width / 1920 * 50;
     ySize = screen.height / 1080 * 50;
+    collisionSize = this.xSize;
     dx = 0;
     dy = 0;
     rotation = 0;
