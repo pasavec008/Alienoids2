@@ -2,10 +2,10 @@ class Asteroid{
     texture = new Image();
     x;
     y;
-    size = Math.random() * 200 + 50;
-    collisionSize = this.size * 0.9;
-    xSize = screen.width / 1920 * this.size;
+    size = Math.random() * (screen.height / 1080 * 200) + screen.height / 1080 * 50;
     ySize = screen.height / 1080 * this.size;
+    xSize = this.ySize;
+    collisionSize = this.xSize * 0.9;
     dx = (300 - this.size) / 150;
     dy = (300 - this.size) / 150;
     rotation = 0;
