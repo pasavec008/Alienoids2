@@ -1,16 +1,17 @@
 class PlayerShip{
     x = screen.width / 2;
     y = screen.height / 2;
-    ySize = screen.height / 1080 * 50;
+    ySize = screen.height / 1080 * 70;
     xSize = this.ySize;
-    collisionSize = this.xSize;
+    collisionSize = this.xSize * 0.8;
     dx = 0;
     dy = 0;
     rotation = 0;
     rotationRadians;
-    rotationSpeed = 5;
-    speed = 0.15;
+    rotationSpeed = 2;
+    speed = 0.07;
     passiveSlowSpeed = 50;
+    animation = 0.95;
     health;
     shield;
     texture = new Image();
@@ -40,6 +41,10 @@ class PlayerShip{
             this.rotation += 360;
 
         if(controller.keys[38]){//up
+            if(this.animation <= 5.5)
+                this.animation += 0.05;
+            else
+                this.animation--;
 
             //zmazat potom
             model.player.money++;
@@ -48,6 +53,11 @@ class PlayerShip{
             this.dy -= Math.cos(this.rotationRadians) * this.speed;
             this.dx += Math.sin(this.rotationRadians) * this.speed;
         }
+        else
+            if(this.animation >= 1)
+                this.animation -= 0.05;
+        
+
 
         this.x += this.dx;
         this.y += this.dy;
@@ -63,7 +73,7 @@ class PlayerShip{
         context.save();
         context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
         context.rotate(this.rotation * Math.PI / 180.0);
-        context.drawImage(this.texture, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
+        context.drawImage(this.texture, Math.floor(this.animation) * 200, 0, 200, 200, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
         context.restore();
     }
 }
