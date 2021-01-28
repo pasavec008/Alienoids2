@@ -1,8 +1,8 @@
 class PlayerShip{
-    x = screen.width / 2;
-    y = screen.height / 2;
     ySize = screen.height / 1080 * 70;
     xSize = this.ySize;
+    x = screen.width / 2 - this.xSize / 2;
+    y = screen.height * 0.85 / 2 - this.ySize / 2;
     collisionSize = this.xSize * 0.8;
     dx = 0;
     dy = 0;
@@ -14,10 +14,14 @@ class PlayerShip{
     animation = 0.95;
     health;
     shield;
+    shieldSize = screen.height / 1080 * 90;
+    shieldOffset = (this.shieldSize - this.ySize) / 2;
     texture = new Image();
+    texture_shield = new Image();
 
     constructor(spaceshipID){
         this.texture.src = "textures/spaceships/" + spaceshipID + ".png";
+        this.texture_shield.src = "textures/spaceships/shield" + spaceshipID + ".png";
     }
 
     change(controller, model){
@@ -40,14 +44,15 @@ class PlayerShip{
         else if(this.rotation < 0)
             this.rotation += 360;
 
-        if(controller.keys[38]){//up
+        if(controller.keys[38] && model.player.sulfum > 0){//up
             if(this.animation <= 5.5)
                 this.animation += 0.05;
             else
                 this.animation--;
 
-            //zmazat potom
-            model.player.money++;
+            model.player.sulfum -= 0.1;
+            if(model.player.sulfum < 0)
+                model.player.sulfum = 0;
 
             this.rotationRadians = this.rotation * Math.PI / 180.0;
             this.dy -= Math.cos(this.rotationRadians) * this.speed;
@@ -74,6 +79,8 @@ class PlayerShip{
         context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
         context.rotate(this.rotation * Math.PI / 180.0);
         context.drawImage(this.texture, Math.floor(this.animation) * 200, 0, 200, 200, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
+        context.drawImage(this.texture_shield, 0 - this.xSize / 2 - this.shieldOffset, 0 - this.ySize / 2 - this.shieldOffset, this.shieldSize, this.shieldSize);
         context.restore();
+        
     }
 }

@@ -1,3 +1,6 @@
 class Player{
-    money = 0;
+    sulfum = 1000;
+    titanium = 500;
+    ice = 0;
+    algae = 0;
 }
