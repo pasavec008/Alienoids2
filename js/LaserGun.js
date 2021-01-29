@@ -22,13 +22,13 @@ class LaserGun{
 
     shoot(model, booleanShoot){
         if(booleanShoot && this.cooldownTimer == 0){
-            this.rotation = model.playerShip.rotation;
+            this.rotation = model.playerShip.rotation + this.rotationOffset;
             this.rotationRadians = this.rotation * Math.PI / 180.0;
             this.dy = - Math.cos(this.rotationRadians) * this.speed;
             this.dx = Math.sin(this.rotationRadians) * this.speed;
 
             model.objects_4.push(new Shot(this.shotTexture, this.shotCollisionDamage, this.shotType, 1, this.shotXSize, this.shotYSize, this.shotCollisionSize,
-                model.playerShip.x + model.playerShip.xSize / 2, model.playerShip.y + model.playerShip.ySize / 2, this.dx, this.dy, this.rotation + this.rotationOffset));
+                model.playerShip.x + model.playerShip.xSize / 2, model.playerShip.y + model.playerShip.ySize / 2, this.dx, this.dy, this.rotation));
             this.cooldownTimer = this.cooldown;
         }
         else if(this.cooldownTimer > 0)
