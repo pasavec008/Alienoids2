@@ -19,12 +19,12 @@ class View{
             for(var i = 0; i < objects_to_draw_4.length; i++)
                objects_to_draw_4[i].draw(this.context);
 
+        if(playerShip != undefined)
+            playerShip.draw(this.context);
+
         if(objects_to_draw_5 != undefined)
             for(var i = 0; i < objects_to_draw_5.length; i++)
                objects_to_draw_5[i].draw(this.context);
-
-
-        if(playerShip != undefined)
-            playerShip.draw(this.context);
+        
     }
 }

@@ -10,6 +10,9 @@ class Asteroid{
     dy = (300 - this.size) / 150;
     rotation = 0;
     rotationSpeed = (260 - this.size) / 150;
+    maxHealth = Math.floor(this.size * 2);
+    health = this.maxHealth;
+    collisionDamage = this.maxHealth;
 
     constructor(){
         if(Math.random() > 0.5)
@@ -29,6 +32,10 @@ class Asteroid{
         }
 
         this.texture.src = "textures/enemies/aste" + Math.floor(Math.random()*3 + 1) + ".png";
+    }
+
+    takeDamage(x){
+        this.health -= x;
     }
 
     draw(context){

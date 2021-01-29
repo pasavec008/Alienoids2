@@ -40,6 +40,11 @@ class Model{
             this.view.viewLoop(this.objects_1);
         }
         else if(this.mode == 2){
+            if(this.playerShip.health <= 0){
+                this.mode = 1;
+                return;
+            }
+
             this.playerShip.change(controller, this);
 
             for(var i = 0; i < this.objects_2.length; i++){
@@ -48,6 +53,8 @@ class Model{
 
             for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
                 this.objects_3[i].change(controller, this);
+                if(this.objects_3[i].health <= 0)
+                    this.objects_3.splice(i, 1);
             }
 
             for(var i = 0; i < this.objects_5.length; i++){
@@ -55,8 +62,10 @@ class Model{
             }
 
             for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
-                if(this.collision(this.playerShip, this.objects_3[i]))
-                    this.objects_3.splice(i, 1);
+                if(this.collision(this.playerShip, this.objects_3[i])){
+                    this.playerShip.takeDamage(this.objects_3[i].collisionDamage);
+                    this.objects_3[i].takeDamage(this.playerShip.collisionDamage);
+                }
             }
 
             this.view.viewLoop(this.objects_2, this.objects_3, this.objects_4, this.objects_5, this.playerShip, this.maxEnemies);
