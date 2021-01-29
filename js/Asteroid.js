@@ -6,8 +6,8 @@ class Asteroid{
     ySize = screen.height / 1080 * this.size;
     xSize = this.ySize;
     collisionSize = this.xSize * 0.9;
-    dx = (300 - this.size) / 150;
-    dy = (300 - this.size) / 150;
+    dx = (300 - this.size) / 150 / 1080 * screen.height;
+    dy = (300 - this.size) / 150 / 1080 * screen.height;
     rotation = 0;
     rotationSpeed = (260 - this.size) / 150;
     maxHealth = Math.floor(this.size * 2);

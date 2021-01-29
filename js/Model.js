@@ -12,6 +12,8 @@ class Model{
     objects_4 = []; //objects of ammo
     objects_5 = []; //objects of hud and effects
 
+    music = new Audio();
+
     constructor(context){
         this.view = new View(context);
         this.objects_1.push(new Menu());
@@ -40,7 +42,7 @@ class Model{
             this.view.viewLoop(this.objects_1);
         }
         else if(this.mode == 2){
-            if(this.playerShip.health <= 0){
+            if(this.playerShip.health <= 0 || this.objects_3.length == 0){
                 this.mode = 1;
                 return;
             }
@@ -57,6 +59,12 @@ class Model{
                     this.objects_3.splice(i, 1);
             }
 
+            for(var i = 0; i < this.objects_4.length; i++){
+                this.objects_4[i].change(controller, this);
+                if(this.objects_4[i].health <= 0)
+                    this.objects_4.splice(i, 1);
+            }
+
             for(var i = 0; i < this.objects_5.length; i++){
                 this.objects_5[i].change(controller, this);
             }
@@ -65,6 +73,17 @@ class Model{
                 if(this.collision(this.playerShip, this.objects_3[i])){
                     this.playerShip.takeDamage(this.objects_3[i].collisionDamage);
                     this.objects_3[i].takeDamage(this.playerShip.collisionDamage);
+                }
+            }
+
+            //enemies3 + ammo4 collision
+            for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
+                for(var ii = 0; ii < this.objects_4.length; ii++){
+                    if(this.collision(this.objects_4[ii], this.objects_3[i])){
+                        this.objects_3[i].takeDamage(this.objects_4[ii].collisionDamage);
+                        if(this.objects_4[ii].type == 1)
+                            this.objects_4[ii].health = 0;
+                    }
                 }
             }
 

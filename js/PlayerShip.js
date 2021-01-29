@@ -10,8 +10,8 @@ class PlayerShip{
     rotation = 0;
     rotationRadians;
     rotationSpeed = 2;
-    speed = 0.07;
-    passiveSlowSpeed = 50;
+    speed = 0.07 / 1080 * screen.height;
+    passiveSlowSpeed = 50 / 1080 * screen.height;
 
     animation = 0.95;
     maxHealth = 1000;
@@ -26,12 +26,16 @@ class PlayerShip{
     activeShieldTextureTimer = 0;
     activeShieldTexture = 0;
 
+    primaryWeapons = [];
+
     texture = new Image();
     texture_shield = new Image();
 
     constructor(spaceshipID){
         this.texture.src = "textures/spaceships/" + spaceshipID + ".png";
         this.texture_shield.src = "textures/spaceships/shield" + spaceshipID + ".png";
+
+        this.primaryWeapons.push(new LaserGun(0));
     }
 
     takeDamage(x){
@@ -113,6 +117,12 @@ class PlayerShip{
             this.dx *= -1.25;
         if(this.y < 0 || this.y + this.ySize > screen.height * 0.85)
             this.dy *= -1.25;
+
+        //primary weapons
+        for(var i = 0; i < this.primaryWeapons.length; i++){
+            this.primaryWeapons[i].shoot(model, controller.keys[17]);
+        }
+            
     }
 
     draw(context){
