@@ -39,8 +39,8 @@ class Hud{
         this.chunkOrange.src = "textures/hud/chunkOrange.png";
         this.chunkBlue.src = "textures/hud/chunkBlue.png";
 
-        this.maxHealth = model.playerShip.maxHealth;
-        this.maxShield = model.playerShip.maxShield;
+        this.maxHealth = model.player.playerShip[model.player.activePlayerShip].maxHealth;
+        this.maxShield = model.player.playerShip[model.player.activePlayerShip].maxShield;
     }
 
 
@@ -65,7 +65,7 @@ class Hud{
     }
 
     drawShipState(context, x, y, current, max, color){
-        var numberOfChunks = Math.floor(current / max * 30);
+        var numberOfChunks = Math.ceil(current / max * 30);
 
         for(var i = 0; i < numberOfChunks; i++)
             context.drawImage(color, x + i * this.xSizeChunk, y, this.xSizeChunk, this.ySizeChunk);
@@ -99,7 +99,7 @@ class Hud{
         this.algae = model.player.algae;
         this.enemiesLeft = model.objects_3.length;
 
-        this.health = model.playerShip.health;
-        this.shield = model.playerShip.shield;
+        this.health = model.player.playerShip[model.player.activePlayerShip].health;
+        this.shield = model.player.playerShip[model.player.activePlayerShip].shield;
     }
 }

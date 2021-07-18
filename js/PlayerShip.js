@@ -1,10 +1,9 @@
 class PlayerShip{
     ySize = screen.height / 1080 * 70;
     xSize = this.ySize;
-    x = screen.width / 2 - this.xSize / 2;
-    y = screen.height * 0.85 / 2 - this.ySize / 2;
+    x;  //sets during lvl creation
+    y;  //sets during lvl creation
     collisionSize = this.xSize * 0.8;
-    
     dx = 0;
     dy = 0;
     rotation = 0;
@@ -26,7 +25,13 @@ class PlayerShip{
     activeShieldTextureTimer = 0;
     activeShieldTexture = 0;
 
-    primaryWeapons = [];
+    weaponFrames = [];
+    avionicsFrames = [];
+    shieldFrames = [];
+    frameConstantX = screen.width / 1920 * 110;
+    weaponFrameBaseY = screen.height / 1080 * 420;
+    avionicsFrameBaseY = screen.height / 1080 * 620;
+    shieldFrameBaseY = screen.height / 1080 * 820;
 
     texture = new Image();
     texture_shield = new Image();
@@ -35,7 +40,25 @@ class PlayerShip{
         this.texture.src = "textures/spaceships/" + spaceshipID + ".png";
         this.texture_shield.src = "textures/spaceships/shield" + spaceshipID + ".png";
 
-        this.primaryWeapons.push(new LaserGun(0));
+        //frames
+        if(spaceshipID == 0){
+            for(var i = 0; i < 3; i++){
+                this.weaponFrames.push(new Frame(155 + i * this.frameConstantX, this.weaponFrameBaseY))
+            }
+            for(var i = 0; i < 3; i++){
+                this.avionicsFrames.push(new Frame(155 + i * this.frameConstantX, this.avionicsFrameBaseY))
+            }
+            for(var i = 0; i < 2; i++){
+                this.shieldFrames.push(new Frame(155 + i * this.frameConstantX, this.shieldFrameBaseY))
+            }
+        }
+
+        this.weaponFrames[0].item = new LaserGun(0);
+        this.weaponFrames[0].update("1_1");
+        this.weaponFrames[1].item = new LaserGun(-10);
+        this.weaponFrames[1].update("1_1");
+        this.weaponFrames[2].item = new LaserGun(10);
+        this.weaponFrames[2].update("1_1");
     }
 
     takeDamage(x){
@@ -119,8 +142,9 @@ class PlayerShip{
             this.dy *= -1.25;
 
         //primary weapons
-        for(var i = 0; i < this.primaryWeapons.length; i++){
-            this.primaryWeapons[i].shoot(model, controller.keys[17]);
+        for(var i = 0; i < this.weaponFrames.length; i++){
+            if(this.weaponFrames[i].item != 0)
+                this.weaponFrames[i].item.shoot(model, controller.keys[17]);
         }
             
     }

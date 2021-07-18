@@ -14,6 +14,9 @@ class View{
         if(objects_to_draw_3 != undefined)
             for(var i = 0; i < maxEnemies && i < objects_to_draw_3.length; i++)
                 objects_to_draw_3[i].draw(this.context);
+            for(var i = 0; i < maxEnemies && i < objects_to_draw_3.length; i++)
+                objects_to_draw_3[i].drawHealth(this.context);
+                
 
         if(objects_to_draw_4 != undefined)
             for(var i = 0; i < objects_to_draw_4.length; i++)

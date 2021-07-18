@@ -1,4 +1,4 @@
-class Asteroid{
+class Asteroid extends Enemy{
     texture = new Image();
     x;
     y;
@@ -15,6 +15,7 @@ class Asteroid{
     collisionDamage = this.maxHealth;
 
     constructor(){
+        super();
         if(Math.random() > 0.5)
             this.dx *= -1;
         if(Math.random() > 0.5)
@@ -34,21 +35,10 @@ class Asteroid{
         this.texture.src = "textures/enemies/aste" + Math.floor(Math.random()*3 + 1) + ".png";
     }
 
-    takeDamage(x){
-        this.health -= x;
-    }
-
-    draw(context){
-        context.save();
-        context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
-        context.rotate(this.rotation * Math.PI / 180.0);
-        context.drawImage(this.texture, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
-        context.restore();
-    }
-
     change(controller, model){
         this.x += this.dx;
         this.y += this.dy;
+        this.lastDamage++;
 
         if(this.x > screen.width)
             this.x = 0 - this.xSize;

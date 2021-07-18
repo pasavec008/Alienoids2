@@ -17,12 +17,10 @@ class Controller{
     }
 
     mouseCheck(leftX, leftY, rightX, RightY){
-        if(this.mouse_x > screen.width * leftX && this.mouse_y > screen.height * leftY &&
-            this.mouse_x < screen.width * rightX && this.mouse_y < screen.height * RightY &&
-            this.click == 1){
-                this.click = 0;
-                return 1;
-            }
+        if(this.mouse_x > leftX && this.mouse_y > leftY && this.mouse_x < rightX && this.mouse_y < RightY && this.click == 1){
+            this.click = 0;
+            return 1;
+        }
         else
             return 0;
     }

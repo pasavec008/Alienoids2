@@ -4,7 +4,7 @@ class LaserGun{
     shotType = 1;
     shotCollisionDamage = 50;
 
-    shotXSize = screen.width / 1920 * 15;
+    shotXSize = screen.width / 1920 * 10;
     shotYSize = screen.height / 1080 * 50;
     shotCollisionSize = this.shotXSize;
     speed = 10;
@@ -14,7 +14,7 @@ class LaserGun{
     rotationOffset;
 
     cooldownTimer = 0;
-    cooldown = 20;
+    cooldown = 50;
 
     constructor(rotationOffset){
         this.rotationOffset = rotationOffset;

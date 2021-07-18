@@ -1,6 +1,6 @@
 class Model{
     view;
-    mode = 1;
+    mode = 1; // 1-start 2-level 3-shop
     levels;
     player;
     playerShip;
@@ -12,6 +12,8 @@ class Model{
     objects_4 = []; //objects of ammo
     objects_5 = []; //objects of hud and effects
 
+    objects_6 = []; //objects of shop
+
     music = new Audio();
 
     constructor(context){
@@ -19,6 +21,7 @@ class Model{
         this.objects_1.push(new Menu());
         this.levels = new Levels();
         this.player = new Player();
+        this.objects_6.push(new Shop(this.player));
     }
 
     collision(object1, object2){
@@ -35,19 +38,22 @@ class Model{
     }
 
     modelLoop(controller){
+        //start of the game
         if(this.mode == 1){
             for(var i = 0; i < this.objects_1.length; i++){
                 this.objects_1[i].change(controller, this);
             }
             this.view.viewLoop(this.objects_1);
         }
+
+        //level
         else if(this.mode == 2){
-            if(this.playerShip.health <= 0 || this.objects_3.length == 0){
-                this.mode = 1;
+            if(this.player.playerShip[this.player.activePlayerShip].health <= 0 || this.objects_3.length == 0){
+                this.mode = 3;
                 return;
             }
 
-            this.playerShip.change(controller, this);
+            this.player.playerShip[this.player.activePlayerShip].change(controller, this);
 
             for(var i = 0; i < this.objects_2.length; i++){
                 this.objects_2[i].change(controller, this);
@@ -70,9 +76,9 @@ class Model{
             }
 
             for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
-                if(this.collision(this.playerShip, this.objects_3[i])){
-                    this.playerShip.takeDamage(this.objects_3[i].collisionDamage);
-                    this.objects_3[i].takeDamage(this.playerShip.collisionDamage);
+                if(this.collision(this.player.playerShip[this.player.activePlayerShip], this.objects_3[i])){
+                    this.player.playerShip[this.player.activePlayerShip].takeDamage(this.objects_3[i].collisionDamage);
+                    this.objects_3[i].takeDamage(this.player.playerShip[this.player.activePlayerShip].collisionDamage);
                 }
             }
 
@@ -87,7 +93,15 @@ class Model{
                 }
             }
 
-            this.view.viewLoop(this.objects_2, this.objects_3, this.objects_4, this.objects_5, this.playerShip, this.maxEnemies);
+            this.view.viewLoop(this.objects_2, this.objects_3, this.objects_4, this.objects_5, this.player.playerShip[this.player.activePlayerShip], this.maxEnemies);
+        }
+
+        //shop
+        else if(this.mode == 3){
+            for(var i = 0; i < this.objects_6.length; i++){
+                this.objects_6[i].change(controller, this);
+            }
+            this.view.viewLoop(this.objects_6);
         }
             
     }
