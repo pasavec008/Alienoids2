@@ -61,6 +61,7 @@ class PlayerShip{
 
         this.primaryFrames[0].item = new MiningBeam();
         this.primaryFrames[1].item = new MiningBeam();
+        this.secondaryFrames[0].item = new Rocket();
         this.primaryFrames[2].item = new LaserGun();
     }
 
@@ -149,6 +150,12 @@ class PlayerShip{
         for(var i = 0; i < this.primaryFrames.length; i++){
             if(this.primaryFrames[i].item != 0)
                 this.primaryFrames[i].item.shoot(model, controller.keys[17], this.primaryFrames[i].rotationOfItem);
+        }
+
+        //secondary weapons
+        for(var i = 0; i < this.secondaryFrames.length; i++){
+            if(this.secondaryFrames[i].item != 0)
+                this.secondaryFrames[i].item.shoot(model, controller.keys[67], this.secondaryFrames[i].rotationOfItem, this);
         }
             
     }

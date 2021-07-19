@@ -1,5 +1,5 @@
 class MiningBeam extends PrimaryWeapon{
-    itemID = 2;
+    itemID = "1_2";
     shotTexture = 2;
     shotType = 1;
     special = 1; //anti-asteroid
@@ -17,7 +17,7 @@ class MiningBeam extends PrimaryWeapon{
 
     constructor(){
         super();
-        this.texture.src = "textures/shop/items/2.png";
+        this.texture.src = "textures/shop/items/1_2.png";
     }
 
     shoot(model, booleanShoot, rotationOffset){

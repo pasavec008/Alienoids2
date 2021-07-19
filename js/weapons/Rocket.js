@@ -1,30 +1,34 @@
-class LaserGun extends PrimaryWeapon{
-    itemID = "1_1";
+class Rocket extends SecondaryWeapon{
+    itemID = "2_1";
     shotType = 1;
-    shotCollisionDamage = 50;
+    shotCollisionDamage = 300;
 
-    shotXSize = screen.width / 1920 * 10;
-    shotYSize = screen.height / 1080 * 50;
+    shotXSize = screen.width / 1920 * 20;
+    shotYSize = screen.height / 1080 * 70;
     shotCollisionSize = this.shotXSize;
-    speed = 10;
+    speed = 7;
     health = 1;
     keepAlive = -1;
     special = 0;
 
     cooldownTimer = 0;
-    cooldown = 50;
+    cooldown = 150;
 
     constructor(){
         super();
-        this.texture.src = "textures/shop/items/1_1.png";
+        this.texture.src = "textures/shop/items/2_1.png";
     }
 
-    shoot(model, booleanShoot, rotationOffset){
+    shoot(model, booleanShoot, rotationOffset, playerShip){
         if(booleanShoot && this.cooldownTimer == 0){
             this.rotation = model.playerShip.rotation + rotationOffset;
             this.rotationRadians = this.rotation * Math.PI / 180.0;
             this.dy = - Math.cos(this.rotationRadians) * this.speed;
             this.dx = Math.sin(this.rotationRadians) * this.speed;
+
+            playerShip.shield -= 100;
+            playerShip.hitTimer = 0;
+            playerShip.activeShieldTextureTimer = 10;
 
             model.objects_4.push(new Shot(this, model));
             this.cooldownTimer = this.cooldown;
