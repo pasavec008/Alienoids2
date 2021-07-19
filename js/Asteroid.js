@@ -35,6 +35,18 @@ class Asteroid extends Enemy{
         this.texture.src = "textures/enemies/aste" + Math.floor(Math.random()*3 + 1) + ".png";
     }
 
+    takeDamage(collidedObject){
+        var modifier = 1;
+        if(collidedObject.special == 1){
+            modifier = 7;
+            this.dx /= 1.02;
+            this.dy /= 1.02;
+            this.rotationSpeed /= 1.03;
+        }
+        this.health -= collidedObject.collisionDamage * modifier;
+        this.lastDamage = 0;
+    }
+
     change(controller, model){
         this.x += this.dx;
         this.y += this.dy;

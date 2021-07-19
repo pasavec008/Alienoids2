@@ -11,27 +11,32 @@ class Shot{
     dx;
     dy;
     rotation;
+    keepAlive;
+    special;
 
-    constructor(shotTexture, collisionDamage, type, health, xSize, ySize, collisionSize, x, y, dx, dy, rotation){
-        this.shotTexture.src = "textures/weapons/shot" + shotTexture + ".png";
-        this.collisionDamage = collisionDamage;
-        this.type = type;
-        this.health = health;
-        this.xSize = xSize;
-        this.ySize = ySize;
-        this.collisionSize = collisionSize;
-        this.x = x - this.xSize / 2;
-        this.y = y - this.ySize / 2;
-        this.dx = dx;
-        this.dy = dy;
-        this.rotation = rotation;
+    constructor(weapon, model){
+        this.shotTexture.src = "textures/weapons/shot" + weapon.itemID + ".png";
+        this.collisionDamage = weapon.shotCollisionDamage;
+        this.type = weapon.shotType;
+        this.health = weapon.health;
+        this.xSize = weapon.shotXSize;
+        this.ySize = weapon.shotYSize;
+        this.collisionSize = weapon.shotCollisionSize;
+        this.x = model.playerShip.x + model.playerShip.xSize / 2 - this.xSize / 2;
+        this.y = model.playerShip.y + model.playerShip.ySize / 2 - this.ySize / 2;
+        this.dx = weapon.dx;
+        this.dy = weapon.dy;
+        this.rotation = weapon.rotation;
+        this.keepAlive = weapon.keepAlive;
+        this.special = weapon.special;
     }
 
     change(controller, model){
         this.x += this.dx;
         this.y += this.dy;
+        this.keepAlive--;
 
-        if(this.x > screen.width || this.x + this.xSize < 0 || this.y > screen.height * 0.85 || this.y + this.ySize < 0)
+        if(this.keepAlive == 0 || this.x > screen.width || this.x + this.xSize < 0 || this.y > screen.height * 0.85 || this.y + this.ySize < 0)
             this.health = 0;
     }
 

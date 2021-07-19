@@ -1,6 +1,6 @@
 class Model{
     view;
-    mode = 1; // 1-start 2-level 3-shop
+    mode = 3; // 1-start 2-level 3-shop
     levels;
     player;
     playerShip;
@@ -77,8 +77,8 @@ class Model{
 
             for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
                 if(this.collision(this.player.playerShip[this.player.activePlayerShip], this.objects_3[i])){
-                    this.player.playerShip[this.player.activePlayerShip].takeDamage(this.objects_3[i].collisionDamage);
-                    this.objects_3[i].takeDamage(this.player.playerShip[this.player.activePlayerShip].collisionDamage);
+                    this.player.playerShip[this.player.activePlayerShip].takeDamage(this.objects_3[i]);
+                    this.objects_3[i].takeDamage(this.player.playerShip[this.player.activePlayerShip]);
                 }
             }
 
@@ -86,7 +86,7 @@ class Model{
             for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
                 for(var ii = 0; ii < this.objects_4.length; ii++){
                     if(this.collision(this.objects_4[ii], this.objects_3[i])){
-                        this.objects_3[i].takeDamage(this.objects_4[ii].collisionDamage);
+                        this.objects_3[i].takeDamage(this.objects_4[ii]);
                         if(this.objects_4[ii].type == 1)
                             this.objects_4[ii].health = 0;
                     }

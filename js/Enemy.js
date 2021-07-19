@@ -13,8 +13,8 @@ class Enemy{
         this.lastDamage = 200;
     }
 
-    takeDamage(x){
-        this.health -= x;
+    takeDamage(collidedObject){
+        this.health -= collidedObject.collisionDamage;
         this.lastDamage = 0;
     }
 

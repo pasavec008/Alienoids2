@@ -16,8 +16,8 @@ class Controller{
         this.context = context;
     }
 
-    mouseCheck(leftX, leftY, rightX, RightY){
-        if(this.mouse_x > leftX && this.mouse_y > leftY && this.mouse_x < rightX && this.mouse_y < RightY && this.click == 1){
+    mouseCheck(leftX, leftY, rightX, rightY){
+        if(this.mouse_x > leftX && this.mouse_y > leftY && this.mouse_x < rightX && this.mouse_y < rightY && this.click == 1){
             this.click = 0;
             return 1;
         }

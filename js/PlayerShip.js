@@ -18,20 +18,23 @@ class PlayerShip{
     collisionDamage = this.maxHealth;
     health = this.maxHealth;
     shield = this.maxShield;
-    shieldAbsorption = 0.8;
+    shieldAbsorption = 0.7;
     shieldSize = screen.height / 1080 * 90;
     shieldOffset = (this.shieldSize - this.ySize) / 2;
     hitTimer = 100;
     activeShieldTextureTimer = 0;
     activeShieldTexture = 0;
 
-    weaponFrames = [];
+    primaryFrames = [];
+    secondaryFrames = [];
     avionicsFrames = [];
     shieldFrames = [];
-    frameConstantX = screen.width / 1920 * 110;
-    weaponFrameBaseY = screen.height / 1080 * 420;
-    avionicsFrameBaseY = screen.height / 1080 * 620;
-    shieldFrameBaseY = screen.height / 1080 * 820;
+    frameConstantX = screen.width / 1920 * 150;
+    frameConstantChangeX = screen.width / 1920 * 110;
+    primaryFrameBaseY = screen.height / 1080 * 195;
+    secondaryFrameBaseY = screen.height / 1080 * 345;
+    avionicsFrameBaseY = screen.height / 1080 * 495;
+    shieldFrameBaseY = screen.height / 1080 * 645;
 
     texture = new Image();
     texture_shield = new Image();
@@ -43,25 +46,26 @@ class PlayerShip{
         //frames
         if(spaceshipID == 0){
             for(var i = 0; i < 3; i++){
-                this.weaponFrames.push(new Frame(155 + i * this.frameConstantX, this.weaponFrameBaseY))
+                this.primaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.primaryFrameBaseY, 2, -35 + 35 * i))
+            }
+            for(var i = 0; i < 1; i++){
+                this.secondaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.secondaryFrameBaseY, 3, 0))
             }
             for(var i = 0; i < 3; i++){
-                this.avionicsFrames.push(new Frame(155 + i * this.frameConstantX, this.avionicsFrameBaseY))
+                this.avionicsFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.avionicsFrameBaseY, 4, 0))
             }
             for(var i = 0; i < 2; i++){
-                this.shieldFrames.push(new Frame(155 + i * this.frameConstantX, this.shieldFrameBaseY))
+                this.shieldFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.shieldFrameBaseY, 5, 0))
             }
         }
 
-        this.weaponFrames[0].item = new LaserGun(0);
-        this.weaponFrames[0].update("1_1");
-        this.weaponFrames[1].item = new LaserGun(-10);
-        this.weaponFrames[1].update("1_1");
-        this.weaponFrames[2].item = new LaserGun(10);
-        this.weaponFrames[2].update("1_1");
+        this.primaryFrames[0].item = new MiningBeam();
+        this.primaryFrames[1].item = new MiningBeam();
+        this.primaryFrames[2].item = new LaserGun();
     }
 
-    takeDamage(x){
+    takeDamage(collidedObject){
+        var x = collidedObject.collisionDamage;
         this.hitTimer = 0;
         this.activeShieldTextureTimer = 10;
         var shieldDamage = x * this.shieldAbsorption;
@@ -78,7 +82,7 @@ class PlayerShip{
 
     change(controller, model){
         this.hitTimer++;
-        if(this.hitTimer > 300 && this.shield < this.maxShield){
+        if(this.hitTimer > 500 && this.shield < this.maxShield){
             this.activeShieldTextureTimer = 1;
             this.shield += this.maxShield / 500;
             if(this.shield > this.maxShield)
@@ -142,9 +146,9 @@ class PlayerShip{
             this.dy *= -1.25;
 
         //primary weapons
-        for(var i = 0; i < this.weaponFrames.length; i++){
-            if(this.weaponFrames[i].item != 0)
-                this.weaponFrames[i].item.shoot(model, controller.keys[17]);
+        for(var i = 0; i < this.primaryFrames.length; i++){
+            if(this.primaryFrames[i].item != 0)
+                this.primaryFrames[i].item.shoot(model, controller.keys[17], this.primaryFrames[i].rotationOfItem);
         }
             
     }
