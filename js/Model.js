@@ -1,6 +1,6 @@
 class Model{
     view;
-    mode = 3; // 1-start 2-level 3-shop
+    mode = 1; // 1-start 2-level 3-shop
     levels;
     player;
     playerShip;
