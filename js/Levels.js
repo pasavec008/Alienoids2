@@ -4,10 +4,12 @@ class Levels{
     }
 
     init(model){
+        model.changeModeCounter = 0;
         model.playerShip = model.player.playerShip[model.player.activePlayerShip];
         model.objects_2 = [];
         model.objects_3 = [];
         model.objects_4 = [];
+        
 
         model.player.playerShip[model.player.activePlayerShip].x = screen.width / 2 - model.player.playerShip[model.player.activePlayerShip].xSize / 2;
         model.player.playerShip[model.player.activePlayerShip].y = screen.height * 0.85 / 2 - model.player.playerShip[model.player.activePlayerShip].ySize / 2;

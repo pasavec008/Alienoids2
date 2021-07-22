@@ -1,5 +1,5 @@
 class PlayerShip{
-    ySize = screen.height / 1080 * 70;
+    ySize = ScalableSize.y(70);
     xSize = this.ySize;
     x;  //sets during lvl creation
     y;  //sets during lvl creation
@@ -9,17 +9,17 @@ class PlayerShip{
     rotation = 0;
     rotationRadians;
     rotationSpeed = 2;
-    speed = 0.07 / 1080 * screen.height;
-    passiveSlowSpeed = 50 / 1080 * screen.height;
+    speed = ScalableSize.y(0.07);
+    passiveSlowSpeed = ScalableSize.y(50);
 
     animation = 0.95;
     maxHealth = 1000;
     maxShield = 500;
-    collisionDamage = this.maxHealth;
+    collisionDamage;
     health = this.maxHealth;
     shield = this.maxShield;
     shieldAbsorption = 0.7;
-    shieldSize = screen.height / 1080 * 90;
+    shieldSize = ScalableSize.y(90);
     shieldOffset = (this.shieldSize - this.ySize) / 2;
     hitTimer = 100;
     activeShieldTextureTimer = 0;
@@ -29,12 +29,12 @@ class PlayerShip{
     secondaryFrames = [];
     avionicsFrames = [];
     shieldFrames = [];
-    frameConstantX = screen.width / 1920 * 150;
-    frameConstantChangeX = screen.width / 1920 * 110;
-    primaryFrameBaseY = screen.height / 1080 * 195;
-    secondaryFrameBaseY = screen.height / 1080 * 345;
-    avionicsFrameBaseY = screen.height / 1080 * 495;
-    shieldFrameBaseY = screen.height / 1080 * 645;
+    frameConstantX = ScalableSize.x(150);
+    frameConstantChangeX = ScalableSize.x(110);
+    primaryFrameBaseY = ScalableSize.y(195);
+    secondaryFrameBaseY = ScalableSize.y(345);
+    avionicsFrameBaseY = ScalableSize.y(495);
+    shieldFrameBaseY = ScalableSize.y(645);
 
     texture = new Image();
     texture_shield = new Image();
@@ -46,16 +46,16 @@ class PlayerShip{
         //frames
         if(spaceshipID == 0){
             for(var i = 0; i < 3; i++){
-                this.primaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.primaryFrameBaseY, 2, -35 + 35 * i))
+                this.primaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.primaryFrameBaseY, 2, -35 + 35 * i, 90))
             }
             for(var i = 0; i < 1; i++){
-                this.secondaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.secondaryFrameBaseY, 3, 0))
+                this.secondaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.secondaryFrameBaseY, 3, 0, 90))
             }
             for(var i = 0; i < 3; i++){
-                this.avionicsFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.avionicsFrameBaseY, 4, 0))
+                this.avionicsFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.avionicsFrameBaseY, 4, 0, 90))
             }
             for(var i = 0; i < 2; i++){
-                this.shieldFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.shieldFrameBaseY, 5, 0))
+                this.shieldFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.shieldFrameBaseY, 5, 0, 90))
             }
         }
 
@@ -82,6 +82,11 @@ class PlayerShip{
     }
 
     change(controller, model){
+        if(this.health <= 0)
+            return;
+
+        this.collisionDamage = this.health + this.shield;
+        
         this.hitTimer++;
         if(this.hitTimer > 500 && this.shield < this.maxShield){
             this.activeShieldTextureTimer = 1;
@@ -161,6 +166,9 @@ class PlayerShip{
     }
 
     draw(context){
+        if(this.health <= 0)
+            return;
+
         context.save();
         context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
         context.rotate(this.rotation * Math.PI / 180.0);

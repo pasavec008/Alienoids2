@@ -1,10 +1,11 @@
 class Model{
     view;
-    mode = 1; // 1-start 2-level 3-shop
+    mode = 3; // 1-start 2-level 3-shop
     levels;
     player;
     playerShip;
     maxEnemies;
+    changeModeCounter;
     objects_1 = []; //objects for main menu
 
     objects_2 = []; //objects for level, wallpaper and wallpaper effects
@@ -49,8 +50,13 @@ class Model{
         //level
         else if(this.mode == 2){
             if(this.player.playerShip[this.player.activePlayerShip].health <= 0 || this.objects_3.length == 0){
-                this.mode = 3;
-                return;
+                this.changeModeCounter++;
+                if(this.changeModeCounter > 180){
+                    this.changeModeCounter = 0;
+                    this.mode = 3;
+                    return;
+                }
+                
             }
 
             this.player.playerShip[this.player.activePlayerShip].change(controller, this);
@@ -75,12 +81,16 @@ class Model{
                 this.objects_5[i].change(controller, this);
             }
 
-            for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
-                if(this.collision(this.player.playerShip[this.player.activePlayerShip], this.objects_3[i])){
-                    this.player.playerShip[this.player.activePlayerShip].takeDamage(this.objects_3[i]);
-                    this.objects_3[i].takeDamage(this.player.playerShip[this.player.activePlayerShip]);
+            //ship collision
+            if(this.player.playerShip[this.player.activePlayerShip].health > 0){
+                for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
+                    if(this.collision(this.player.playerShip[this.player.activePlayerShip], this.objects_3[i])){
+                        this.player.playerShip[this.player.activePlayerShip].takeDamage(this.objects_3[i]);
+                        this.objects_3[i].takeDamage(this.player.playerShip[this.player.activePlayerShip]);
+                    }
                 }
             }
+            
 
             //enemies3 + ammo4 collision
             for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){

@@ -6,14 +6,17 @@ class MiningBeam extends PrimaryWeapon{
     keepAlive;
     shotCollisionDamage = 1;
 
-    shotXSize = screen.width / 1920 * 5;
-    shotYSize = screen.height / 1080 * 5;
+    shotXSize = ScalableSize.x(5);
+    shotYSize = ScalableSize.y(5);
     shotCollisionSize = this.shotXSize;
     speed = 7;
     health = 1;
 
     cooldownTimer = 0;
     cooldown = 1;
+
+    construction = "new MiningBeam();";
+    price = [1000, 0, 0, 0];
 
     constructor(){
         super();

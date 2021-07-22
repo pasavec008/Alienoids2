@@ -6,14 +6,14 @@ class Hud{
     numbersGreen = new Image();
     numbersRed = new Image();
 
+    framePrimary = new Image();
+    frameSecondary = new Image();
+
     chunkOrange = new Image();
     chunkBlue = new Image();
-    
-    xSizeNumber = screen.width / 1920 * 25;
-    ySizeNumber = screen.height / 1080 * 25;
 
-    xSizeChunk = screen.width / 1920 * 10;
-    ySizeChunk = screen.height / 1080 * 40;
+    xSizeChunk = ScalableSize.x(10);
+    ySizeChunk = ScalableSize.y(40);
     
     sulfum;
     titanium;
@@ -33,37 +33,15 @@ class Hud{
 
     constructor(model){
         this.texture.src = "textures/hud/hud1.png";
-        this.numbersYellow.src = "textures/hud/numbersYellow.png";
-        this.numbersPurple.src = "textures/hud/numbersPurple.png";
-        this.numbersBlue.src = "textures/hud/numbersBlue.png";
-        this.numbersGreen.src = "textures/hud/numbersGreen.png";
         this.numbersRed.src = "textures/hud/numbersRed.png";
+
+        this.framePrimary.src = "textures/shop/frame.png";
+        this.frameSecondary.src = "textures/shop/frame2.png";
 
         this.chunkOrange.src = "textures/hud/chunkOrange.png";
         this.chunkBlue.src = "textures/hud/chunkBlue.png";
 
         this.player = model.player;
-    }
-
-
-
-    drawMaterial(context, x, y, pom, pom2, color){
-        var numberOfNumbers = 1;
-
-        //how many numbers
-        while(Math.floor(pom / 10) != 0){
-            numberOfNumbers++;
-            pom = Math.floor(pom / 10);
-        }
-
-        for(var i = 1; i <= numberOfNumbers; i++){
-            pom = Math.floor(pom2 / Math.pow(10, numberOfNumbers - i));
-            pom2 = Math.floor(pom2 % Math.pow(10, numberOfNumbers - i));
-
-
-            context.drawImage(color, pom * 40, 0, 40, 40, x, y, this.xSizeNumber, this.ySizeNumber);
-            x += this.xSizeNumber * 1.1;
-        }
     }
 
     drawShipState(context, x, y, current, max, color){
@@ -76,27 +54,29 @@ class Hud{
     drawCoolDowns(context){
         //primary weapons
         for(var i = 0; i < this.playerShip.primaryFrames.length; i++){
+            context.drawImage(this.framePrimary, ScalableSize.x((940 + i * 75 - 5)), ScalableSize.y(930), ScalableSize.x(60), ScalableSize.y(60));
             if(this.playerShip.primaryFrames[i].item != 0){
-                context.drawImage(this.playerShip.primaryFrames[i].item.texture, (940 + i * 75) / 1920 * screen.width, 935 / 1080 * screen.height, 50, 50);
+                context.drawImage(this.playerShip.primaryFrames[i].item.texture, ScalableSize.x(940 + i * 75), ScalableSize.y(935), 50, 50);
                 var percentualCoolDown = this.playerShip.primaryFrames[i].item.cooldownTimer / this.playerShip.primaryFrames[i].item.cooldown * 50;
                 if(!percentualCoolDown)
                     percentualCoolDown = 50;
                 context.beginPath();
                 context.fillStyle = "rgba(255, 0, 0, 0.5)";
-                context.fillRect((940 + i * 75) / 1920 * screen.width, (935 + percentualCoolDown) / 1080 * screen.height, 50, 50 - percentualCoolDown);
+                context.fillRect( ScalableSize.x(940 + i * 75),  ScalableSize.y(935 + percentualCoolDown),  ScalableSize.x(50),  ScalableSize.y(50 - percentualCoolDown));
                 context.stroke();
             }
         }
 
         for(var i = 0; i < this.playerShip.secondaryFrames.length; i++){
+            context.drawImage(this.frameSecondary,  ScalableSize.x(940 + i * 75 - 5),  ScalableSize.y(1002),  ScalableSize.x(60),  ScalableSize.y(60));
             if(this.playerShip.secondaryFrames[i].item != 0){
-                context.drawImage(this.playerShip.secondaryFrames[i].item.texture, (940 + i * 75) / 1920 * screen.width, 1007 / 1080 * screen.height, 50, 50);
+                context.drawImage(this.playerShip.secondaryFrames[i].item.texture,  ScalableSize.x(940 + i * 75),  ScalableSize.y(1007), 50, 50);
                 var percentualCoolDown = this.playerShip.secondaryFrames[i].item.cooldownTimer / this.playerShip.secondaryFrames[i].item.cooldown * 50;
                 if(!percentualCoolDown)
                     percentualCoolDown = 50;
                 context.beginPath();
                 context.fillStyle = "rgba(255, 0, 0, 0.5)";
-                context.fillRect((940 + i * 75) / 1920 * screen.width, (1007 + percentualCoolDown) / 1080 * screen.height, 50, 50 - percentualCoolDown);
+                context.fillRect(ScalableSize.x(940 + i * 75),  ScalableSize.y(1007 + percentualCoolDown), 50, 50 - percentualCoolDown);
                 context.stroke();
             }
                 
@@ -107,31 +87,27 @@ class Hud{
         context.drawImage(this.texture, 0, screen.height * 0.85, screen.width, screen.height * 0.15);
 
         //sulfum
-        this.drawMaterial(context, screen.width * 0.051, 947 / 1080 * screen.height, this.sulfum, this.sulfum, this.numbersYellow);
+        this.player.drawMaterial(context,  ScalableSize.x(98),  ScalableSize.y(947), this.player.sulfum, this.player.numbersYellow);
         //titanium
-        this.drawMaterial(context, screen.width * 0.051, 1019 / 1080 * screen.height, this.titanium, this.titanium, this.numbersPurple);
+        this.player.drawMaterial(context,  ScalableSize.x(98),  ScalableSize.y(1019), this.player.titanium, this.player.numbersPurple);
         //ice
-        this.drawMaterial(context, 380 / 1920 * screen.width, 947 / 1080 * screen.height, this.ice, this.ice, this.numbersBlue);
+        this.player.drawMaterial(context,  ScalableSize.x(380),  ScalableSize.y(947), this.player.ice, this.player.numbersBlue);
         //algae
-        this.drawMaterial(context, 380 / 1920 * screen.width, 1019 / 1080 * screen.height, this.algae, this.algae, this.numbersGreen);
+        this.player.drawMaterial(context,  ScalableSize.x(380),  ScalableSize.y(1019), this.player.algae, this.player.numbersGreen);
         
         //enemies
-        this.drawMaterial(context, 660 / 1920 * screen.width, 983 / 1080 * screen.height, this.enemiesLeft, this.enemiesLeft, this.numbersRed);
+        this.player.drawMaterial(context,  ScalableSize.x(660), ScalableSize.y(983), this.enemiesLeft, this.numbersRed);
 
         //ship state
-        this.drawShipState(context, 1583 / 1920 * screen.width, screen.height * 0.8704, this.health, this.playerShip.maxHealth, this.chunkOrange);
+        this.drawShipState(context,  ScalableSize.x(1583), ScalableSize.y(940), this.health, this.playerShip.maxHealth, this.chunkOrange);
         //shield state
-        this.drawShipState(context, 1583 / 1920 * screen.width, screen.height * 0.9370, this.shield, this.playerShip.maxShield, this.chunkBlue);
+        this.drawShipState(context,  ScalableSize.x(1583), ScalableSize.y(1012), this.shield, this.playerShip.maxShield, this.chunkBlue);
 
         //weapon cooldowns
         this.drawCoolDowns(context);
     }
 
     change(controller, model){
-        this.sulfum = model.player.sulfum;
-        this.titanium = model.player.titanium;
-        this.ice = model.player.ice;
-        this.algae = model.player.algae;
         this.enemiesLeft = model.objects_3.length;
 
         this.playerShip = this.player.playerShip[this.player.activePlayerShip];

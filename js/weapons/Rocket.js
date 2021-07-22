@@ -3,8 +3,8 @@ class Rocket extends SecondaryWeapon{
     shotType = 1;
     shotCollisionDamage = 300;
 
-    shotXSize = screen.width / 1920 * 20;
-    shotYSize = screen.height / 1080 * 70;
+    shotXSize = ScalableSize.x(20);
+    shotYSize = ScalableSize.y(70);
     shotCollisionSize = this.shotXSize;
     speed = 7;
     health = 1;
@@ -13,6 +13,9 @@ class Rocket extends SecondaryWeapon{
 
     cooldownTimer = 0;
     cooldown = 150;
+
+    construction = "new Rocket();";
+    price = [1000, 0, 0, 0];
 
     constructor(){
         super();

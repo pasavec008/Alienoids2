@@ -2,12 +2,12 @@ class Asteroid extends Enemy{
     texture = new Image();
     x;
     y;
-    size = (Math.random() * 200 + 50) / 1080 * screen.height;
+    size = ScalableSize.y(Math.random() * 200 + 50);
     ySize = this.size;
     xSize = this.ySize;
     collisionSize = this.xSize * 0.9;
-    dx = (300 - this.size) / 150 / 1080 * screen.height;
-    dy = (300 - this.size) / 150 / 1080 * screen.height;
+    dx = ScalableSize.y((300 - this.size) / 150);
+    dy = this.dx;
     rotation = 0;
     rotationSpeed = (260 - this.size) / 150;
     maxHealth = Math.floor(this.size * 2);

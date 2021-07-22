@@ -3,8 +3,8 @@ class LaserGun extends PrimaryWeapon{
     shotType = 1;
     shotCollisionDamage = 50;
 
-    shotXSize = screen.width / 1920 * 10;
-    shotYSize = screen.height / 1080 * 50;
+    shotXSize = ScalableSize.x(10);
+    shotYSize = ScalableSize.y(50);
     shotCollisionSize = this.shotXSize;
     speed = 10;
     health = 1;
@@ -13,6 +13,9 @@ class LaserGun extends PrimaryWeapon{
 
     cooldownTimer = 0;
     cooldown = 50;
+
+    construction = "new LaserGun();";
+    price = [1000, 0, 0, 0];
 
     constructor(){
         super();
