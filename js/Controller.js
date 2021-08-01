@@ -6,7 +6,6 @@ class Controller{
     click;
     model;
     context;
-    canvas;
     
     constructor(context, canvas){
         this.mouse_x = 0;
@@ -15,7 +14,6 @@ class Controller{
         this.click = 0;
         this.model = new Model(context);
         this.context = context;
-        this.canvas = canvas;
     }
 
     mouseCheck(leftX, leftY, rightX, rightY){
