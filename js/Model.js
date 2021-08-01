@@ -6,7 +6,7 @@ class Model{
     playerShip;
     maxEnemies;
     changeModeCounter;
-    objects_1 = []; //objects for main menu
+    menu; //objects for main menu
 
     wallpaper;
     hud;
@@ -18,7 +18,7 @@ class Model{
 
     constructor(context){
         this.view = new View(context);
-        this.objects_1.push(new Menu());
+        this.menu = new Menu();
         this.levels = new Levels();
         this.player = new Player();
         this.shop = new Shop(this.player);
@@ -40,10 +40,7 @@ class Model{
     modelLoop(controller){
         //start of the game
         if(this.mode == 1){
-            for(var i = 0; i < this.objects_1.length; i++){
-                this.objects_1[i].change(controller, this);
-            }
-            this.view.drawObjects(this.objects_1);
+            this.menu.change(controller, this);
         }
 
         //level
@@ -96,20 +93,13 @@ class Model{
                     }
                 }
             }
-
-            this.view.clearCanvas();
-            this.view.drawObject(this.wallpaper);
-            this.view.drawObjects(this.projectiles);
-            this.view.drawEnemies(this.enemies, this.maxEnemies);
-            this.view.drawObject(this.player.playerShip[this.player.activePlayerShip]);
-            this.view.drawObject(this.hud);
         }
 
         //shop
         else if(this.mode == 3){
             this.shop.change(controller, this);
-            this.view.drawObject(this.shop);
         }
-            
+         
+        this.view.viewLoop(this.mode, this);
     }
 }

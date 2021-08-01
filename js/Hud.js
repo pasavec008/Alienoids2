@@ -109,10 +109,8 @@ class Hud{
 
     change(controller, model){
         this.enemiesLeft = model.enemies.length;
-
         this.playerShip = this.player.playerShip[this.player.activePlayerShip];
         this.health = this.playerShip.health;
         this.shield = this.playerShip.shield;
-
     }
 }

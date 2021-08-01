@@ -28,4 +28,26 @@ class View{
             for(var i = 0; i < objects_to_draw.length; i++)
                 objects_to_draw[i].draw(this.context);
     }
+
+    viewLoop(mode, model){
+        this.clearCanvas();
+        //start of the game
+        if(mode == 1){
+            this.drawObject(model.menu);
+        }
+
+        //level
+        else if(mode == 2){
+            this.drawObject(model.wallpaper);
+            this.drawObjects(model.projectiles);
+            this.drawEnemies(model.enemies, model.maxEnemies);
+            this.drawObject(model.player.playerShip[model.player.activePlayerShip]);
+            this.drawObject(model.hud);
+        }
+
+        //shop
+        else if(mode == 3){
+            this.drawObject(model.shop);
+        }
+    }
 }

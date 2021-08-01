@@ -7,7 +7,7 @@ class Levels{
         model.changeModeCounter = 0;
         model.playerShip = model.player.playerShip[model.player.activePlayerShip];
         model.wallpaper = undefined;
-        model.hud = undefined;
+        model.hud = new Hud(model);
         model.enemies = [];
         model.projectiles = [];
         
@@ -33,9 +33,10 @@ class Levels{
         model.maxEnemies = 10;
 
         model.wallpaper = new Wallpaper(1);
-        model.hud = new Hud(model);
+        
 
         for(var i = 0; i < 25; i++)
             model.enemies.push(new Asteroid());
+        model.hud.enemiesLeft = model.enemies.length;
     }
 }
