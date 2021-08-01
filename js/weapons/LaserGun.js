@@ -3,8 +3,8 @@ class LaserGun extends PrimaryWeapon{
     shotType = 1;
     shotCollisionDamage = 50;
 
-    shotXSize = ScalableSize.x(10);
-    shotYSize = ScalableSize.y(50);
+    shotXSize = 10;
+    shotYSize = 50;
     shotCollisionSize = this.shotXSize;
     speed = 10;
     health = 1;

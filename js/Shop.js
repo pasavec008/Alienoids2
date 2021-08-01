@@ -4,17 +4,17 @@ class Shop{
     shipFrames = [];
     shopFrames = [];
 
-    shopFrameBaseX = ScalableSize.x(850);
-    shopFrameBaseY = ScalableSize.y(195);
-    shopFrameChangeX = ScalableSize.x(60);
+    shopFrameBaseX = 850;
+    shopFrameBaseY = 195;
+    shopFrameChangeX = 60;
 
-    shipFrameBaseX = ScalableSize.x(150);
-    shipFrameBaseY = ScalableSize.x(795);
-    shipFrameChangeX = ScalableSize.x(110);
+    shipFrameBaseX = 150;
+    shipFrameBaseY = 795;
+    shipFrameChangeX = 110;
     player;
-    levelButton = new Button(ScalableSize.x(1570), ScalableSize.y(830), ScalableSize.x(200), ScalableSize.y(100), "textures/shop/button.png");
-    buyButton = new Button(ScalableSize.x(840), ScalableSize.y(830), ScalableSize.x(200), ScalableSize.y(100), "textures/shop/buy.png");
-    sellButton = new Button(ScalableSize.x(1070), ScalableSize.y(830), ScalableSize.x(200), ScalableSize.y(100), "textures/shop/sell.png");
+    levelButton = new Button(1570, 830, 200, 100, "textures/shop/button.png");
+    buyButton = new Button(840, 830, 200, 100, "textures/shop/buy.png");
+    sellButton = new Button(1070, 830, 200, 100, "textures/shop/sell.png");
 
 
     constructor(player){
@@ -132,7 +132,7 @@ class Shop{
     }
 
     draw(context){
-        context.drawImage(this.texture, 0, 0, screen.width, screen.height);
+        context.drawImage(this.texture, 0, 0, 1920, 1080);
         
         //frames draw
         for(var i = 0; i < this.shipFrames.length; i++){
@@ -169,9 +169,9 @@ class Shop{
         }
 
         //materials
-        this.player.drawMaterial(context, ScalableSize.x(1000), ScalableSize.y(700), this.player.sulfum, this.player.numbersYellow);
-        this.player.drawMaterial(context, ScalableSize.x(1000), ScalableSize.y(770), this.player.titanium, this.player.numbersPurple);
-        this.player.drawMaterial(context, ScalableSize.x(1495), ScalableSize.y(700), this.player.ice, this.player.numbersBlue);
-        this.player.drawMaterial(context, ScalableSize.x(1495), ScalableSize.y(770), this.player.algae, this.player.numbersGreen);
+        this.player.drawMaterial(context, 1000, 700, this.player.sulfum, this.player.numbersYellow);
+        this.player.drawMaterial(context, 1000, 770, this.player.titanium, this.player.numbersPurple);
+        this.player.drawMaterial(context, 1495, 700, this.player.ice, this.player.numbersBlue);
+        this.player.drawMaterial(context, 1495, 770, this.player.algae, this.player.numbersGreen);
     }
 }

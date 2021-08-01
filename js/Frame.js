@@ -18,7 +18,7 @@ class Frame{
         this.y = y;
         this.frameType = frameType;
         this.rotationOfItem = rotationOfItem;
-        this.xSize = ScalableSize.y(size);
+        this.xSize = size;
         this.ySize = this.xSize;
     }
 

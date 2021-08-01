@@ -36,7 +36,7 @@ class Shot{
         this.y += this.dy;
         this.keepAlive--;
 
-        if(this.keepAlive == 0 || this.x > screen.width || this.x + this.xSize < 0 || this.y > screen.height * 0.85 || this.y + this.ySize < 0)
+        if(this.keepAlive == 0 || this.x > 1920 || this.x + this.xSize < 0 || this.y > 1080 * 0.85 || this.y + this.ySize < 0)
             this.health = 0;
     }
 

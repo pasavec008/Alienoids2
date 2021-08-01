@@ -6,8 +6,8 @@ class MiningBeam extends PrimaryWeapon{
     keepAlive;
     shotCollisionDamage = 1;
 
-    shotXSize = ScalableSize.x(5);
-    shotYSize = ScalableSize.y(5);
+    shotXSize = 5;
+    shotYSize = 5;
     shotCollisionSize = this.shotXSize;
     speed = 7;
     health = 1;

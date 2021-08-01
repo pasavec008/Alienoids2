@@ -8,8 +8,8 @@ function main(){
     context = canvas.getContext("2d");
 
 //change size of canvas for proper fullscreen
-    canvas.width = screen.width;
-    canvas.height = screen.height;
+    canvas.width = 1920;
+    canvas.height = 1080;
 
     var controller = new Controller(context);
 

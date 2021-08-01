@@ -43,15 +43,3 @@ class Controller{
         this.keys[event.keyCode] = false;
     }
 };
-
-ScalableSize = {
-    x(x){
-        return x / 1920 * screen.width;
-    },
-
-    y(y){
-        return y / 1080 * screen.height;
-    }
-}
-
-
