@@ -6,9 +6,11 @@ class Levels{
     init(model){
         model.changeModeCounter = 0;
         model.playerShip = model.player.playerShip[model.player.activePlayerShip];
-        model.objects_2 = [];
-        model.objects_3 = [];
-        model.objects_4 = [];
+        model.wallpaper = undefined;
+        model.hud = undefined;
+        model.enemies = [];
+        model.projectiles = [];
+        
         
 
         model.player.playerShip[model.player.activePlayerShip].x = 1920 / 2 - model.player.playerShip[model.player.activePlayerShip].xSize / 2;
@@ -30,10 +32,10 @@ class Levels{
         
         model.maxEnemies = 10;
 
-        model.objects_2.push(new Wallpaper(1));
-        model.objects_5.push(new Hud(model));
+        model.wallpaper = new Wallpaper(1);
+        model.hud = new Hud(model);
 
         for(var i = 0; i < 25; i++)
-            model.objects_3.push(new Asteroid());
+            model.enemies.push(new Asteroid());
     }
 }

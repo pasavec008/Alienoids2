@@ -30,7 +30,7 @@ class MiningBeam extends PrimaryWeapon{
             this.dy = - Math.cos(this.rotationRadians) * this.speed;
             this.dx = Math.sin(this.rotationRadians) * this.speed;
             this.keepAlive = 10 + Math.ceil(Math.random() * 30);
-            model.objects_4.push(new Shot(this, model));
+            model.projectiles.push(new Shot(this, model));
             this.cooldownTimer = this.cooldown;
         }
         else if(this.cooldownTimer > 0)

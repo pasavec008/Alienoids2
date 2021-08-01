@@ -29,7 +29,7 @@ class LaserGun extends PrimaryWeapon{
             this.dy = - Math.cos(this.rotationRadians) * this.speed;
             this.dx = Math.sin(this.rotationRadians) * this.speed;
 
-            model.objects_4.push(new Shot(this, model));
+            model.projectiles.push(new Shot(this, model));
             this.cooldownTimer = this.cooldown;
         }
         else if(this.cooldownTimer > 0)

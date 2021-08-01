@@ -8,12 +8,11 @@ class Model{
     changeModeCounter;
     objects_1 = []; //objects for main menu
 
-    objects_2 = []; //objects for level, wallpaper and wallpaper effects
-    objects_3 = []; //objects of enemies
-    objects_4 = []; //objects of ammo
-    objects_5 = []; //objects of hud and effects
-
-    objects_6 = []; //objects of shop
+    wallpaper;
+    hud;
+    enemies = []; //objects of enemies
+    projectiles = []; //objects of ammo
+    shop; //objects of shop
 
     music = new Audio();
 
@@ -22,7 +21,7 @@ class Model{
         this.objects_1.push(new Menu());
         this.levels = new Levels();
         this.player = new Player();
-        this.objects_6.push(new Shop(this.player));
+        this.shop = new Shop(this.player);
     }
 
     collision(object1, object2){
@@ -44,12 +43,12 @@ class Model{
             for(var i = 0; i < this.objects_1.length; i++){
                 this.objects_1[i].change(controller, this);
             }
-            this.view.viewLoop(this.objects_1);
+            this.view.drawObjects(this.objects_1);
         }
 
         //level
         else if(this.mode == 2){
-            if(this.player.playerShip[this.player.activePlayerShip].health <= 0 || this.objects_3.length == 0){
+            if(this.player.playerShip[this.player.activePlayerShip].health <= 0 || this.enemies.length == 0){
                 this.changeModeCounter++;
                 if(this.changeModeCounter > 180){
                     this.changeModeCounter = 0;
@@ -61,57 +60,55 @@ class Model{
 
             this.player.playerShip[this.player.activePlayerShip].change(controller, this);
 
-            for(var i = 0; i < this.objects_2.length; i++){
-                this.objects_2[i].change(controller, this);
+
+            for(var i = 0; i < this.maxEnemies && i < this.enemies.length; i++){
+                this.enemies[i].change(controller, this);
+                if(this.enemies[i].health <= 0)
+                    this.enemies.splice(i, 1);
             }
 
-            for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
-                this.objects_3[i].change(controller, this);
-                if(this.objects_3[i].health <= 0)
-                    this.objects_3.splice(i, 1);
+            for(var i = 0; i < this.projectiles.length; i++){
+                this.projectiles[i].change(controller, this);
+                if(this.projectiles[i].health <= 0)
+                    this.projectiles.splice(i, 1);
             }
 
-            for(var i = 0; i < this.objects_4.length; i++){
-                this.objects_4[i].change(controller, this);
-                if(this.objects_4[i].health <= 0)
-                    this.objects_4.splice(i, 1);
-            }
-
-            for(var i = 0; i < this.objects_5.length; i++){
-                this.objects_5[i].change(controller, this);
-            }
+            this.hud.change(controller, this);
 
             //ship collision
             if(this.player.playerShip[this.player.activePlayerShip].health > 0){
-                for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
-                    if(this.collision(this.player.playerShip[this.player.activePlayerShip], this.objects_3[i])){
-                        this.player.playerShip[this.player.activePlayerShip].takeDamage(this.objects_3[i]);
-                        this.objects_3[i].takeDamage(this.player.playerShip[this.player.activePlayerShip]);
+                for(var i = 0; i < this.maxEnemies && i < this.enemies.length; i++){
+                    if(this.collision(this.player.playerShip[this.player.activePlayerShip], this.enemies[i])){
+                        this.player.playerShip[this.player.activePlayerShip].takeDamage(this.enemies[i]);
+                        this.enemies[i].takeDamage(this.player.playerShip[this.player.activePlayerShip]);
                     }
                 }
             }
             
 
             //enemies3 + ammo4 collision
-            for(var i = 0; i < this.maxEnemies && i < this.objects_3.length; i++){
-                for(var ii = 0; ii < this.objects_4.length; ii++){
-                    if(this.collision(this.objects_4[ii], this.objects_3[i])){
-                        this.objects_3[i].takeDamage(this.objects_4[ii]);
-                        if(this.objects_4[ii].type == 1)
-                            this.objects_4[ii].health = 0;
+            for(var i = 0; i < this.maxEnemies && i < this.enemies.length; i++){
+                for(var ii = 0; ii < this.projectiles.length; ii++){
+                    if(this.collision(this.projectiles[ii], this.enemies[i])){
+                        this.enemies[i].takeDamage(this.projectiles[ii]);
+                        if(this.projectiles[ii].type == 1)
+                            this.projectiles[ii].health = 0;
                     }
                 }
             }
 
-            this.view.viewLoop(this.objects_2, this.objects_3, this.objects_4, this.objects_5, this.player.playerShip[this.player.activePlayerShip], this.maxEnemies);
+            this.view.clearCanvas();
+            this.view.drawObject(this.wallpaper);
+            this.view.drawObjects(this.projectiles);
+            this.view.drawEnemies(this.enemies, this.maxEnemies);
+            this.view.drawObject(this.player.playerShip[this.player.activePlayerShip]);
+            this.view.drawObject(this.hud);
         }
 
         //shop
         else if(this.mode == 3){
-            for(var i = 0; i < this.objects_6.length; i++){
-                this.objects_6[i].change(controller, this);
-            }
-            this.view.viewLoop(this.objects_6);
+            this.shop.change(controller, this);
+            this.view.drawObject(this.shop);
         }
             
     }

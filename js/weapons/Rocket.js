@@ -33,7 +33,7 @@ class Rocket extends SecondaryWeapon{
             playerShip.hitTimer = 0;
             playerShip.activeShieldTextureTimer = 10;
 
-            model.objects_4.push(new Shot(this, model));
+            model.projectiles.push(new Shot(this, model));
             this.cooldownTimer = this.cooldown;
         }
         else if(this.cooldownTimer > 0)

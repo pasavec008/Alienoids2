@@ -5,29 +5,27 @@ class View{
         this.context = context;
     }
 
-    viewLoop(objects_to_draw_2, objects_to_draw_3, objects_to_draw_4, objects_to_draw_5, playerShip, maxEnemies){
+    clearCanvas(){
         this.context.clearRect(0, 0, 1920, 1080);
+    }
 
-        for(var i = 0; i < objects_to_draw_2.length; i++)
-            objects_to_draw_2[i].draw(this.context);
+    drawEnemies(enemies, maxEnemies){
+        if(enemies != undefined){
+            for(var i = 0; i < maxEnemies && i < enemies.length; i++)
+                enemies[i].draw(this.context);
+            for(var i = 0; i < maxEnemies && i < enemies.length; i++)
+                enemies[i].drawHealth(this.context);
+        }
+    }
 
-        if(objects_to_draw_3 != undefined)
-            for(var i = 0; i < maxEnemies && i < objects_to_draw_3.length; i++)
-                objects_to_draw_3[i].draw(this.context);
-            for(var i = 0; i < maxEnemies && i < objects_to_draw_3.length; i++)
-                objects_to_draw_3[i].drawHealth(this.context);
-                
+    drawObject(objectToDraw){
+        if(objectToDraw != undefined)
+            objectToDraw.draw(this.context);
+    }
 
-        if(objects_to_draw_4 != undefined)
-            for(var i = 0; i < objects_to_draw_4.length; i++)
-               objects_to_draw_4[i].draw(this.context);
-
-        if(playerShip != undefined)
-            playerShip.draw(this.context);
-
-        if(objects_to_draw_5 != undefined)
-            for(var i = 0; i < objects_to_draw_5.length; i++)
-               objects_to_draw_5[i].draw(this.context);
-        
+    drawObjects(objects_to_draw){
+        if(objects_to_draw != undefined)
+            for(var i = 0; i < objects_to_draw.length; i++)
+                objects_to_draw[i].draw(this.context);
     }
 }
