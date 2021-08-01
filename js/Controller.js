@@ -7,7 +7,7 @@ class Controller{
     model;
     context;
     
-    constructor(context, canvas){
+    constructor(context){
         this.mouse_x = 0;
         this.mouse_y = 0;
         this.keys = [];

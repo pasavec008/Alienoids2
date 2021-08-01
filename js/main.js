@@ -11,7 +11,7 @@ function main(){
     canvas.width = 1920;
     canvas.height = 1080;
 
-    var controller = new Controller(context, canvas);
+    var controller = new Controller(context);
 
 //set event listeners
     window.onkeydown = function(event){
