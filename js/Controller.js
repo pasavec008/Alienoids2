@@ -6,14 +6,16 @@ class Controller{
     click;
     model;
     context;
+    canvas;
     
-    constructor(context){
+    constructor(context, canvas){
         this.mouse_x = 0;
         this.mouse_y = 0;
         this.keys = [];
         this.click = 0;
         this.model = new Model(context);
         this.context = context;
+        this.canvas = canvas;
     }
 
     mouseCheck(leftX, leftY, rightX, rightY){
@@ -43,15 +45,3 @@ class Controller{
         this.keys[event.keyCode] = false;
     }
 };
-
-ScalableSize = {
-    x(x){
-        return x / 1920 * screen.width;
-    },
-
-    y(y){
-        return y / 1080 * screen.height;
-    }
-}
-
-

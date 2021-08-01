@@ -6,7 +6,7 @@ class View{
     }
 
     viewLoop(objects_to_draw_2, objects_to_draw_3, objects_to_draw_4, objects_to_draw_5, playerShip, maxEnemies){
-        this.context.clearRect(0, 0, screen.width, screen.height);
+        this.context.clearRect(0, 0, 1920, 1080);
 
         for(var i = 0; i < objects_to_draw_2.length; i++)
             objects_to_draw_2[i].draw(this.context);

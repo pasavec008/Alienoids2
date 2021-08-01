@@ -2,11 +2,11 @@ class Asteroid extends Enemy{
     texture = new Image();
     x;
     y;
-    size = ScalableSize.y(Math.random() * 200 + 50);
+    size = Math.random() * 200 + 50;
     ySize = this.size;
     xSize = this.ySize;
     collisionSize = this.xSize * 0.9;
-    dx = ScalableSize.y((300 - this.size) / 150);
+    dx = (300 - this.size) / 150;
     dy = this.dx;
     rotation = 0;
     rotationSpeed = (260 - this.size) / 150;
@@ -24,12 +24,12 @@ class Asteroid extends Enemy{
             this.rotationSpeed *= -1;
 
         if(Math.random() > 0.5){
-            this.x = Math.random() * screen.width;
+            this.x = Math.random() * 1920;
             this.y = -500;
         }
         else{
             this.x = -500;
-            this.y = Math.random() * screen.height;
+            this.y = Math.random() * 1080;
         }
 
         this.texture.src = "textures/enemies/aste" + Math.floor(Math.random()*3 + 1) + ".png";
@@ -52,15 +52,15 @@ class Asteroid extends Enemy{
         this.y += this.dy;
         this.lastDamage++;
 
-        if(this.x > screen.width)
+        if(this.x > 1920)
             this.x = 0 - this.xSize;
         else if(this.x + this.xSize < 0)
-            this.x = screen.width;
+            this.x = 1920;
 
-        if(this.y > screen.height * 0.85)
+        if(this.y > 1080 * 0.85)
             this.y = 0 - this.ySize;
         else if(this.y + this.ySize < 0)
-            this.y = screen.height * 0.85;
+            this.y = 1080 * 0.85;
 
         this.rotation += this.rotationSpeed;
 

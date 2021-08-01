@@ -7,18 +7,18 @@ class Player{
     ice = 0;
     algae = 0;
 
-    xSizeNumber = ScalableSize.x(25);
-    ySizeNumber = ScalableSize.y(25);
+    xSizeNumber = 25;
+    ySizeNumber = 25;
 
     numbersYellow = new Image();
     numbersPurple = new Image();
     numbersBlue = new Image();
     numbersGreen = new Image();
 
-    frameConstantX = ScalableSize.x(1345);
-    frameConstantChangeX = ScalableSize.x(60);
-    frameConstantY = ScalableSize.y(195);
-    frameConstantChangeY = ScalableSize.y(60);
+    frameConstantX = 1345;
+    frameConstantChangeX = 60;
+    frameConstantY = 195;
+    frameConstantChangeY = 60;
 
     constructor(){
         this.numbersYellow.src = "textures/hud/numbersYellow.png";

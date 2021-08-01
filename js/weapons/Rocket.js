@@ -3,8 +3,8 @@ class Rocket extends SecondaryWeapon{
     shotType = 1;
     shotCollisionDamage = 300;
 
-    shotXSize = ScalableSize.x(20);
-    shotYSize = ScalableSize.y(70);
+    shotXSize = 20;
+    shotYSize = 70;
     shotCollisionSize = this.shotXSize;
     speed = 7;
     health = 1;

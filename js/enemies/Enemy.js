@@ -25,11 +25,11 @@ class Enemy{
             context.beginPath();
             context.lineWidth = "2";
             context.strokeStyle = "rgba(0, 255, 0, 0.7)";
-            context.rect(this.x, this.y - ScalableSize.y(10), currentHealth, 1);
+            context.rect(this.x, this.y - 10, currentHealth, 1);
             context.stroke();
             context.beginPath();
             context.strokeStyle = "rgba(255, 0, 0, 0.7)";
-            context.rect(this.x + currentHealth, this.y - ScalableSize.y(10), damagedHealth, 1);
+            context.rect(this.x + currentHealth, this.y - 10, damagedHealth, 1);
             context.stroke();
         }
     }

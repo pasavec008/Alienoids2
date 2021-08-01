@@ -6,7 +6,7 @@ class Wallpaper{
     }
 
     draw(context){
-        context.drawImage(this.texture, 0, 0, screen.width, screen.height);
+        context.drawImage(this.texture, 0, 0, 1920, 1080);
     }
     change(controller, model){
 

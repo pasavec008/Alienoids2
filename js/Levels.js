@@ -11,8 +11,8 @@ class Levels{
         model.objects_4 = [];
         
 
-        model.player.playerShip[model.player.activePlayerShip].x = screen.width / 2 - model.player.playerShip[model.player.activePlayerShip].xSize / 2;
-        model.player.playerShip[model.player.activePlayerShip].y = screen.height * 0.85 / 2 - model.player.playerShip[model.player.activePlayerShip].ySize / 2;
+        model.player.playerShip[model.player.activePlayerShip].x = 1920 / 2 - model.player.playerShip[model.player.activePlayerShip].xSize / 2;
+        model.player.playerShip[model.player.activePlayerShip].y = 1080 * 0.85 / 2 - model.player.playerShip[model.player.activePlayerShip].ySize / 2;
 
         model.player.playerShip[model.player.activePlayerShip].health = model.player.playerShip[model.player.activePlayerShip].maxHealth;
         model.player.playerShip[model.player.activePlayerShip].shield = model.player.playerShip[model.player.activePlayerShip].maxShield;

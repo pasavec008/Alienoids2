@@ -1,5 +1,5 @@
 class PlayerShip{
-    ySize = ScalableSize.y(70);
+    ySize = 70;
     xSize = this.ySize;
     x;  //sets during lvl creation
     y;  //sets during lvl creation
@@ -9,8 +9,8 @@ class PlayerShip{
     rotation = 0;
     rotationRadians;
     rotationSpeed = 2;
-    speed = ScalableSize.y(0.07);
-    passiveSlowSpeed = ScalableSize.y(50);
+    speed = 0.07;
+    passiveSlowSpeed = 50;
 
     animation = 0.95;
     maxHealth = 1000;
@@ -19,7 +19,7 @@ class PlayerShip{
     health = this.maxHealth;
     shield = this.maxShield;
     shieldAbsorption = 0.7;
-    shieldSize = ScalableSize.y(90);
+    shieldSize = 90;
     shieldOffset = (this.shieldSize - this.ySize) / 2;
     hitTimer = 100;
     activeShieldTextureTimer = 0;
@@ -29,12 +29,12 @@ class PlayerShip{
     secondaryFrames = [];
     avionicsFrames = [];
     shieldFrames = [];
-    frameConstantX = ScalableSize.x(150);
-    frameConstantChangeX = ScalableSize.x(110);
-    primaryFrameBaseY = ScalableSize.y(195);
-    secondaryFrameBaseY = ScalableSize.y(345);
-    avionicsFrameBaseY = ScalableSize.y(495);
-    shieldFrameBaseY = ScalableSize.y(645);
+    frameConstantX = 150;
+    frameConstantChangeX = 110;
+    primaryFrameBaseY = 195;
+    secondaryFrameBaseY = 345;
+    avionicsFrameBaseY = 495;
+    shieldFrameBaseY = 645;
 
     texture = new Image();
     texture_shield = new Image();
@@ -146,9 +146,9 @@ class PlayerShip{
         this.y += this.dy;
 
         //edges of map
-        if(this.x < 0 || this.x + this.xSize > screen.width)
+        if(this.x < 0 || this.x + this.xSize > 1920)
             this.dx *= -1.25;
-        if(this.y < 0 || this.y + this.ySize > screen.height * 0.85)
+        if(this.y < 0 || this.y + this.ySize > 1080 * 0.85)
             this.dy *= -1.25;
 
         //primary weapons

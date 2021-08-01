@@ -12,8 +12,8 @@ class Hud{
     chunkOrange = new Image();
     chunkBlue = new Image();
 
-    xSizeChunk = ScalableSize.x(10);
-    ySizeChunk = ScalableSize.y(40);
+    xSizeChunk = 10;
+    ySizeChunk = 40;
     
     sulfum;
     titanium;
@@ -54,29 +54,29 @@ class Hud{
     drawCoolDowns(context){
         //primary weapons
         for(var i = 0; i < this.playerShip.primaryFrames.length; i++){
-            context.drawImage(this.framePrimary, ScalableSize.x((940 + i * 75 - 5)), ScalableSize.y(930), ScalableSize.x(60), ScalableSize.y(60));
+            context.drawImage(this.framePrimary, 935 + i * 75, 930, 60, 60);
             if(this.playerShip.primaryFrames[i].item != 0){
-                context.drawImage(this.playerShip.primaryFrames[i].item.texture, ScalableSize.x(940 + i * 75), ScalableSize.y(935), 50, 50);
+                context.drawImage(this.playerShip.primaryFrames[i].item.texture, 940 + i * 75, 935, 50, 50);
                 var percentualCoolDown = this.playerShip.primaryFrames[i].item.cooldownTimer / this.playerShip.primaryFrames[i].item.cooldown * 50;
                 if(!percentualCoolDown)
                     percentualCoolDown = 50;
                 context.beginPath();
                 context.fillStyle = "rgba(255, 0, 0, 0.5)";
-                context.fillRect( ScalableSize.x(940 + i * 75),  ScalableSize.y(935 + percentualCoolDown),  ScalableSize.x(50),  ScalableSize.y(50 - percentualCoolDown));
+                context.fillRect(940 + i * 75,  935 + percentualCoolDown,  50,  50 - percentualCoolDown);
                 context.stroke();
             }
         }
 
         for(var i = 0; i < this.playerShip.secondaryFrames.length; i++){
-            context.drawImage(this.frameSecondary,  ScalableSize.x(940 + i * 75 - 5),  ScalableSize.y(1002),  ScalableSize.x(60),  ScalableSize.y(60));
+            context.drawImage(this.frameSecondary,  940 + i * 75 - 5,  1002,  60,  60);
             if(this.playerShip.secondaryFrames[i].item != 0){
-                context.drawImage(this.playerShip.secondaryFrames[i].item.texture,  ScalableSize.x(940 + i * 75),  ScalableSize.y(1007), 50, 50);
+                context.drawImage(this.playerShip.secondaryFrames[i].item.texture,  940 + i * 75,  1007, 50, 50);
                 var percentualCoolDown = this.playerShip.secondaryFrames[i].item.cooldownTimer / this.playerShip.secondaryFrames[i].item.cooldown * 50;
                 if(!percentualCoolDown)
                     percentualCoolDown = 50;
                 context.beginPath();
                 context.fillStyle = "rgba(255, 0, 0, 0.5)";
-                context.fillRect(ScalableSize.x(940 + i * 75),  ScalableSize.y(1007 + percentualCoolDown), 50, 50 - percentualCoolDown);
+                context.fillRect(940 + i * 75,  1007 + percentualCoolDown, 50, 50 - percentualCoolDown);
                 context.stroke();
             }
                 
@@ -84,24 +84,24 @@ class Hud{
     }
 
     draw(context){
-        context.drawImage(this.texture, 0, screen.height * 0.85, screen.width, screen.height * 0.15);
+        context.drawImage(this.texture, 0, 1080 * 0.85, 1920, 1080 * 0.15);
 
         //sulfum
-        this.player.drawMaterial(context,  ScalableSize.x(98),  ScalableSize.y(947), this.player.sulfum, this.player.numbersYellow);
+        this.player.drawMaterial(context,  98,  947, this.player.sulfum, this.player.numbersYellow);
         //titanium
-        this.player.drawMaterial(context,  ScalableSize.x(98),  ScalableSize.y(1019), this.player.titanium, this.player.numbersPurple);
+        this.player.drawMaterial(context,  98,  1019, this.player.titanium, this.player.numbersPurple);
         //ice
-        this.player.drawMaterial(context,  ScalableSize.x(380),  ScalableSize.y(947), this.player.ice, this.player.numbersBlue);
+        this.player.drawMaterial(context,  380,  947, this.player.ice, this.player.numbersBlue);
         //algae
-        this.player.drawMaterial(context,  ScalableSize.x(380),  ScalableSize.y(1019), this.player.algae, this.player.numbersGreen);
+        this.player.drawMaterial(context,  380,  1019, this.player.algae, this.player.numbersGreen);
         
         //enemies
-        this.player.drawMaterial(context,  ScalableSize.x(660), ScalableSize.y(983), this.enemiesLeft, this.numbersRed);
+        this.player.drawMaterial(context,  660, 983, this.enemiesLeft, this.numbersRed);
 
         //ship state
-        this.drawShipState(context,  ScalableSize.x(1583), ScalableSize.y(940), this.health, this.playerShip.maxHealth, this.chunkOrange);
+        this.drawShipState(context,  1583, 940, this.health, this.playerShip.maxHealth, this.chunkOrange);
         //shield state
-        this.drawShipState(context,  ScalableSize.x(1583), ScalableSize.y(1012), this.shield, this.playerShip.maxShield, this.chunkBlue);
+        this.drawShipState(context,  1583, 1012, this.shield, this.playerShip.maxShield, this.chunkBlue);
 
         //weapon cooldowns
         this.drawCoolDowns(context);
