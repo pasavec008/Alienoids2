@@ -14,6 +14,9 @@ class Asteroid extends Enemy{
     health = this.maxHealth;
     collisionDamage = this.maxHealth;
 
+    type;
+    textureType = Math.floor(Math.random() * 3);
+
     constructor(){
         super();
         if(Math.random() > 0.5)
@@ -32,7 +35,34 @@ class Asteroid extends Enemy{
             this.y = Math.random() * 1080;
         }
 
-        this.texture.src = "textures/enemies/aste" + Math.floor(Math.random()*3 + 1) + ".png";
+        var typeDecider = Math.floor(Math.random() * 100) + 1; // range 1-100
+
+        //basic asteroid
+        if(typeDecider <= 80)
+            this.type = 0;
+
+        //sulfum asteroid
+        else if(typeDecider <= 95)
+            this.type = 1;
+
+        //titanium asteroid
+        else if(typeDecider <= 99)
+            this.type = 2;
+
+        //ice asteroid
+        else
+            this.type = 3;
+
+        this.texture.src = "textures/enemies/asteroids.png";
+    }
+
+    death(model){
+        if(this.type == 1)
+            model.loot.push(new Sulfum(this));
+        if(this.type == 2)
+            model.loot.push(new Titanium(this));
+        if(this.type == 3)
+            model.loot.push(new Ice(this));
     }
 
     takeDamage(collidedObject){
@@ -68,5 +98,13 @@ class Asteroid extends Enemy{
             this.rotation -= 360;
         else if(this.rotation < 0)
             this.rotation += 360;
+    }
+
+    draw(context){
+        context.save();
+        context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
+        context.rotate(this.rotation * Math.PI / 180.0);
+        context.drawImage(this.texture, 750 * this.type + 250 * this.textureType, 0, 250, 250, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
+        context.restore();
     }
 }

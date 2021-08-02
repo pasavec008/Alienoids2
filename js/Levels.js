@@ -10,8 +10,7 @@ class Levels{
         model.hud = new Hud(model);
         model.enemies = [];
         model.projectiles = [];
-        
-        
+        model.loot = [];
 
         model.player.playerShip[model.player.activePlayerShip].x = 1920 / 2 - model.player.playerShip[model.player.activePlayerShip].xSize / 2;
         model.player.playerShip[model.player.activePlayerShip].y = 1080 * 0.85 / 2 - model.player.playerShip[model.player.activePlayerShip].ySize / 2;
@@ -36,7 +35,7 @@ class Levels{
         model.wallpaper = new Wallpaper(1);
         
 
-        for(var i = 0; i < 2; i++)
+        for(var i = 0; i < 25; i++)
             model.enemies.push(new Asteroid());
         model.hud.enemiesLeft = model.enemies.length;
     }

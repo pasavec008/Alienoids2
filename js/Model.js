@@ -11,6 +11,7 @@ class Model{
     hud;
     enemies = []; //objects of enemies
     projectiles = []; //objects of ammo
+    loot = [];
     shop;
     levelChoice;
     levelID;
@@ -49,6 +50,7 @@ class Model{
 
         //level
         else if(this.mode == 2){
+            //win/lose conditions
             if(this.player.playerShip[this.player.activePlayerShip].health <= 0 || this.enemies.length == 0){
                 this.changeModeCounter++;
                 if(this.changeModeCounter > 180){
@@ -62,19 +64,28 @@ class Model{
                 
             }
 
+            //playership
             this.player.playerShip[this.player.activePlayerShip].change(controller, this);
 
-
+            //enemies
             for(var i = 0; i < this.maxEnemies && i < this.enemies.length; i++){
                 this.enemies[i].change(controller, this);
-                if(this.enemies[i].health <= 0)
+                if(this.enemies[i].health <= 0){
+                    this.enemies[i].death(this);
                     this.enemies.splice(i, 1);
+                }
             }
 
+            //projectiles
             for(var i = 0; i < this.projectiles.length; i++){
                 this.projectiles[i].change(controller, this);
                 if(this.projectiles[i].health <= 0)
                     this.projectiles.splice(i, 1);
+            }
+
+            //loot
+            for(var i = 0; i < this.loot.length; i++){
+                this.loot[i].change(controller, this);
             }
 
             this.hud.change(controller, this);
@@ -98,6 +109,14 @@ class Model{
                         if(this.projectiles[ii].type == 1)
                             this.projectiles[ii].health = 0;
                     }
+                }
+            }
+
+            //ship loot collision
+            for(var i = 0; i < this.loot.length; i++){
+                if(this.collision(this.player.playerShip[this.player.activePlayerShip], this.loot[i])){
+                    this.loot[i].takeLoot(this.player);
+                    this.loot.splice(i, 1);
                 }
             }
         }

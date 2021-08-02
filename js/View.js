@@ -42,6 +42,7 @@ class View{
             this.drawObject(model.wallpaper);
             this.drawObjects(model.projectiles);
             this.drawEnemies(model.enemies, model.maxEnemies);
+            this.drawObjects(model.loot);
             this.drawObject(model.player.playerShip[model.player.activePlayerShip]);
             this.drawObject(model.hud);
         }
