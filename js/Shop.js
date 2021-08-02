@@ -118,7 +118,8 @@ class Shop{
             if(this.focusedFrame != undefined)
                 this.focusedFrame.focus = -1;
             this.focusedFrame = undefined;
-            model.mode = 1;
+            model.levelChoice.init(model);
+            model.mode = 4;
         }
 
         //buy\sell buttons

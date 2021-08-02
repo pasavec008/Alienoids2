@@ -23,9 +23,10 @@ class Levels{
         model.player.playerShip[model.player.activePlayerShip].rotation = 0;
     }
 
-    create_level_1(model){
+    createLevel1(model){
         this.init(model);
         
+        model.levelID = 1;
         model.music.src = "songs/Bear_McCreary_Something_dark_is_coming.mp3";
         model.music.loop = true;
         model.music.play();
@@ -35,7 +36,7 @@ class Levels{
         model.wallpaper = new Wallpaper(1);
         
 
-        for(var i = 0; i < 25; i++)
+        for(var i = 0; i < 2; i++)
             model.enemies.push(new Asteroid());
         model.hud.enemiesLeft = model.enemies.length;
     }

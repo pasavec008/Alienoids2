@@ -1,18 +1,19 @@
 class Model{
     view;
-    mode = 3; // 1-start 2-level 3-shop
+    mode = 3; // 1-menu 2-level 3-shop 4-levelChoice
     levels;
     player;
     playerShip;
     maxEnemies;
     changeModeCounter;
-    menu; //objects for main menu
 
-    wallpaper;
+    menu;
     hud;
     enemies = []; //objects of enemies
     projectiles = []; //objects of ammo
-    shop; //objects of shop
+    shop;
+    levelChoice;
+    levelID;
 
     music = new Audio();
 
@@ -22,6 +23,7 @@ class Model{
         this.levels = new Levels();
         this.player = new Player();
         this.shop = new Shop(this.player);
+        this.levelChoice = new LevelChoice(this.player, this.levels);
     }
 
     collision(object1, object2){
@@ -32,12 +34,14 @@ class Model{
 
         var distance = Math.sqrt((centre1X - centre2X) * (centre1X - centre2X) + (centre1Y - centre2Y) * (centre1Y - centre2Y));
     
-        if (distance <= object1.collisionSize / 2 + object2.collisionSize / 2)
+        if(distance <= object1.collisionSize / 2 + object2.collisionSize / 2)
             return 1;
         return 0;
     }
 
     modelLoop(controller){
+        var oldMode = this.mode;
+
         //start of the game
         if(this.mode == 1){
             this.menu.change(controller, this);
@@ -48,6 +52,9 @@ class Model{
             if(this.player.playerShip[this.player.activePlayerShip].health <= 0 || this.enemies.length == 0){
                 this.changeModeCounter++;
                 if(this.changeModeCounter > 180){
+                    if(this.enemies.length == 0 && this.levelID + 1 > this.player.maxLevel){
+                        this.player.maxLevel = this.levelID + 1;
+                    }
                     this.changeModeCounter = 0;
                     this.mode = 3;
                     return;
@@ -99,7 +106,13 @@ class Model{
         else if(this.mode == 3){
             this.shop.change(controller, this);
         }
+
+        //levels choice
+        else if(this.mode == 4){
+            this.levelChoice.change(controller, this);
+        }
          
-        this.view.viewLoop(this.mode, this);
+        if(this.mode == oldMode)
+            this.view.viewLoop(this.mode, this);
     }
 }

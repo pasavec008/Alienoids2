@@ -31,6 +31,7 @@ class View{
 
     viewLoop(mode, model){
         this.clearCanvas();
+        
         //start of the game
         if(mode == 1){
             this.drawObject(model.menu);
@@ -48,6 +49,10 @@ class View{
         //shop
         else if(mode == 3){
             this.drawObject(model.shop);
+        }
+
+        else if(mode == 4){
+            this.drawObject(model.levelChoice);
         }
     }
 }
