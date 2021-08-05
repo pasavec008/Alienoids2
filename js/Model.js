@@ -59,6 +59,7 @@ class Model{
                     }
                     this.changeModeCounter = 0;
                     this.mode = 3;
+                    canvas.style.cursor = "crosshair";
                     return;
                 }
                 
@@ -73,6 +74,7 @@ class Model{
                 if(this.enemies[i].health <= 0){
                     this.enemies[i].death(this);
                     this.enemies.splice(i, 1);
+                    i--;
                 }
             }
 

@@ -95,7 +95,8 @@ class Shop{
             this.shipFrames[i].change(controller, model, this);
         }
         for(var i = 0; i < this.shopFrames.length; i++){
-            this.shopFrames[i].change(controller, model, this);
+            if(this.shopFrames[i].item != 0)
+                this.shopFrames[i].change(controller, model, this);
         }
         for(var i = 0; i < this.player.playerShip[this.player.activePlayerShip].primaryFrames.length; i++){
             this.player.playerShip[this.player.activePlayerShip].primaryFrames[i].change(controller, model, this);
@@ -140,7 +141,8 @@ class Shop{
             this.shipFrames[i].draw(context);
         }
         for(var i = 0; i < this.shopFrames.length; i++){
-            this.shopFrames[i].draw(context);
+            if(this.shopFrames[i].item != 0)
+                this.shopFrames[i].draw(context);
         }
         for(var i = 0; i < this.player.playerShip[this.player.activePlayerShip].primaryFrames.length; i++){
             this.player.playerShip[this.player.activePlayerShip].primaryFrames[i].draw(context);
@@ -174,5 +176,29 @@ class Shop{
         this.player.drawMaterial(context, 1000, 770, this.player.titanium, this.player.numbersPurple);
         this.player.drawMaterial(context, 1495, 700, this.player.ice, this.player.numbersBlue);
         this.player.drawMaterial(context, 1495, 770, this.player.algae, this.player.numbersGreen);
+
+        //tooltips
+        for(var i = 0; i < this.shipFrames.length; i++){
+            this.shipFrames[i].drawTip(context);
+        }
+        for(var i = 0; i < this.shopFrames.length; i++){
+            if(this.shopFrames[i].item != 0)
+                this.shopFrames[i].drawTip(context);
+        }
+        for(var i = 0; i < this.player.playerShip[this.player.activePlayerShip].primaryFrames.length; i++){
+            this.player.playerShip[this.player.activePlayerShip].primaryFrames[i].drawTip(context);
+        }
+        for(var i = 0; i < this.player.playerShip[this.player.activePlayerShip].secondaryFrames.length; i++){
+            this.player.playerShip[this.player.activePlayerShip].secondaryFrames[i].drawTip(context);
+        }
+        for(var i = 0; i < this.player.playerShip[this.player.activePlayerShip].avionicsFrames.length; i++){
+            this.player.playerShip[this.player.activePlayerShip].avionicsFrames[i].drawTip(context);
+        }
+        for(var i = 0; i < this.player.playerShip[this.player.activePlayerShip].shieldFrames.length; i++){
+            this.player.playerShip[this.player.activePlayerShip].shieldFrames[i].drawTip(context);
+        }
+        for(var i = 0; i < this.player.storageFrames.length; i++){
+            this.player.storageFrames[i].drawTip(context);
+        }
     }
 }

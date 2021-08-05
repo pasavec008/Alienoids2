@@ -11,6 +11,10 @@ class Frame{
     item = 0;
     rotationOfItem;
 
+    drawToolTipFlag = -1;
+    mousePosX;
+    mousePosY;
+
     constructor(x, y, frameType, rotationOfItem, size){
         this.noFocusTexture.src = "textures/shop/frame.png";
         this.yesFocusTexture.src = "textures/shop/frame2.png";
@@ -22,15 +26,29 @@ class Frame{
         this.ySize = this.xSize;
     }
 
+
     change(controller, model, shop){
         if(controller.mouseCheck(this.x, this.y, this.x + this.xSize, this.y + this.ySize)){
             if(this.frameType == 7 || !shop.switchItems(this))
                 shop.switchFocus(this);
         }
+        if(controller.mouseHoverCheck(this.x, this.y, this.x + this.xSize, this.y + this.ySize)){
+            var temp = controller.mouseHoverCheck(this.x, this.y, this.x + this.xSize, this.y + this.ySize);
+            this.mousePosX = temp[0];
+            this.mousePosY = temp[1];
+            this.drawToolTipFlag = 1;
+        }
+        else
+            this.drawToolTipFlag = -1;
     }
 
     loseFocus(){
         this.focus = -1;
+    }
+
+    drawTip(context){
+        if(this.item != 0 && this.drawToolTipFlag > 0)
+            this.item.drawToolTip(context, this.mousePosX, this.mousePosY);
     }
 
     draw(context){

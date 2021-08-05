@@ -21,7 +21,10 @@ function main(){
         controller.setKeyUp(event);
     }
     window.onmousedown = function(event){
-        controller.setMouseCoordinates(event);
+        controller.setMouseCoordinates(event, 1);
+    }
+    window.onmousemove = function(event){
+        controller.setMouseCoordinates(event, 0);
     }
     window.onmouseup = function(){
         controller.setMouseUp();

@@ -16,7 +16,7 @@ class LevelChoice{
 
         for(var i = 0; i < 10; i++){
             for(var j = 0; j < 20; j++){
-                this.levelChoiceFrames.push(new LevelChoiceFrame(this.frameBaseX + j * this.frameChange, this.frameBaseY + i * this.frameChange, 50, 1 + j + i * 25));
+                this.levelChoiceFrames.push(new LevelChoiceFrame(this.frameBaseX + j * this.frameChange, this.frameBaseY + i * this.frameChange, 50, 1 + j + i * 20));
             }
         }
     }
@@ -52,6 +52,7 @@ class LevelChoice{
             if(this.startButton.change(controller, model)){
                 eval("model.levels.createLevel" + this.focusedFrameID + "(model);");
                 model.mode = 2;
+                canvas.style.cursor = "none";
             }
         }
         //shop button

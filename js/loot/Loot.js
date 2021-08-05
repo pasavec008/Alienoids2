@@ -12,7 +12,7 @@ class Loot{
     constructor(destroyedObject){
         this.xSize = destroyedObject.xSize / 3;
         this.ySize = destroyedObject.ySize / 3;
-        this.collisionSize = this.xSize * 0.9;
+        this.collisionSize = this.xSize * 1.1;
         this.x = destroyedObject.x + destroyedObject.xSize / 2 - this.xSize / 2;
         this.y = destroyedObject.y + destroyedObject.ySize / 2 - this.ySize / 2;
         this.dx = destroyedObject.dx / 2;

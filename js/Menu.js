@@ -10,6 +10,7 @@ class Menu{
             document.body.requestFullscreen();
             model.levels.createLevel1(model);
             model.mode = 2;
+            canvas.style.cursor = "none";
         }   
     }
 

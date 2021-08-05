@@ -25,10 +25,20 @@ class Controller{
             return 0;
     }
 
-    setMouseCoordinates(event){
+    mouseHoverCheck(leftX, leftY, rightX, rightY){
+        if(this.mouse_x > leftX && this.mouse_y > leftY && this.mouse_x < rightX && this.mouse_y < rightY){
+            var array = [this.mouse_x, this.mouse_y];
+            return array;
+        }
+        else
+            return 0;
+    }
+
+    setMouseCoordinates(event, click){
         this.mouse_x = event.offsetX;
         this.mouse_y = event.offsetY;
-        this.click = 1;
+        if(click)
+            this.click = 1;
     }
     
     setMouseUp(){

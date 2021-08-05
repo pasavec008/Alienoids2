@@ -59,10 +59,8 @@ class PlayerShip{
             }
         }
 
-        this.primaryFrames[0].item = new MiningBeam();
-        this.primaryFrames[1].item = new MiningBeam();
+        this.primaryFrames[1].item = new LaserGun();
         this.secondaryFrames[0].item = new Rocket();
-        this.primaryFrames[2].item = new LaserGun();
     }
 
     takeDamage(collidedObject){
