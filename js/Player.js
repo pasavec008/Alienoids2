@@ -6,7 +6,7 @@ class Player{
     titanium = 500;
     ice = 0;
     algae = 0;
-    maxLevel = 1;
+    maxLevel = 3;
 
     xSizeNumber = 25;
     ySizeNumber = 25;

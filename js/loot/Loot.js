@@ -26,10 +26,15 @@ class Loot{
         this.y += this.dy;
 
         //edges of map
-        if(this.x < 0 || this.x + this.xSize > 1920)
-            this.dx *= -1;
-        if(this.y < 0 || this.y + this.ySize > 1080 * 0.85)
-            this.dy *= -1;
+        if(this.x > 1920)
+            this.x = 0 - this.xSize;
+        else if(this.x + this.xSize < 0)
+            this.x = 1920;
+
+        if(this.y > 1080 * 0.85)
+            this.y = 0 - this.ySize;
+        else if(this.y + this.ySize < 0)
+            this.y = 1080 * 0.85;
 
         this.rotation += this.rotationSpeed;
 

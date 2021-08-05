@@ -6,7 +6,5 @@
 
 - fix titanium texture glow so it does not look like square
 
-- loot can hide outside of map when enemy dies there
-
 # Low priority
 - -x% resources after death

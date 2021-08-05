@@ -25,7 +25,7 @@ class Rocket extends SecondaryWeapon{
 
     shoot(model, booleanShoot, rotationOffset, playerShip){
         if(booleanShoot && this.cooldownTimer == 0 && playerShip.shield >= this.shieldCost){
-            this.rotation = model.playerShip.rotation + rotationOffset + (Math.random() - 0.5) * 50;
+            this.rotation = model.playerShip.rotation + rotationOffset + (Math.random() - 0.5) * 40;
             this.rotationRadians = this.rotation * Math.PI / 180.0;
             this.dy = - Math.cos(this.rotationRadians) * this.speed;
             this.dx = Math.sin(this.rotationRadians) * this.speed;
