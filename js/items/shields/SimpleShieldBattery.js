@@ -11,5 +11,6 @@ class SimpleShieldBattery extends Shield{
 
     enhance(ship){
         ship.maxShield += ship.shieldBaseUnit * 1;
+        ship.shieldAbsorption += 0.5;
     }
 }

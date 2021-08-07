@@ -22,7 +22,7 @@ class Falcon{
     collisionDamage;
     health;
     shield;
-    shieldAbsorption = 0.7;
+    shieldAbsorption;
     
     shieldSize = 90;
     shieldOffset = (this.shieldSize - this.ySize) / 2;
@@ -91,11 +91,16 @@ class Falcon{
         }
 
         this.maxShield = 0;
+        this.shieldAbsorption = 0;
+        var numberOfShields = 0;
         for(var i = 0; i < this.shieldFrames.length; i++){
-            if(this.shieldFrames[i].item != 0)
+            if(this.shieldFrames[i].item != 0){
                 this.shieldFrames[i].item.enhance(this);
+                numberOfShields++;
+            }
         }
         this.shield = this.maxShield;
+        this.shieldAbsorption /= numberOfShields;
     }
 
     takeDamage(collidedObject){
@@ -186,15 +191,24 @@ class Falcon{
             this.dy *= -1.25;
 
         //primary weapons
+        var tempBoolean = 0;
+        if(controller.keys[17] || controller.keys[88])
+            tempBoolean = 1;
+        else
+            tempBoolean = 0;
         for(var i = 0; i < this.primaryFrames.length; i++){
             if(this.primaryFrames[i].item != 0)
-                this.primaryFrames[i].item.shoot(model, controller.keys[17], this.primaryFrames[i].rotationOfItem);
+                this.primaryFrames[i].item.shoot(model, tempBoolean, this.primaryFrames[i].rotationOfItem);
         }
 
         //secondary weapons
+        if(controller.keys[67])
+            tempBoolean = 1;
+        else
+            tempBoolean = 0;
         for(var i = 0; i < this.secondaryFrames.length; i++){
             if(this.secondaryFrames[i].item != 0)
-                this.secondaryFrames[i].item.shoot(model, controller.keys[67], this.secondaryFrames[i].rotationOfItem, this);
+                this.secondaryFrames[i].item.shoot(model, tempBoolean, this.secondaryFrames[i].rotationOfItem, this);
         }
             
     }
