@@ -8,3 +8,4 @@
 
 # Low priority
 - -x% resources after death
+- upgrade asteroids textures

@@ -21,7 +21,7 @@ class MiningBeam extends PrimaryWeapon{
     constructor(){
         super();
         this.texture.src = "textures/shop/items/1_2.png";
-        this.toolTipTexture.src = "textures/shop/items/toolTip1_2.png";
+        this.toolTipTexture.src = "textures/shop/items/1_2TT.png";
     }
 
     shoot(model, booleanShoot, rotationOffset){

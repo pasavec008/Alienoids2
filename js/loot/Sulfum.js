@@ -6,7 +6,7 @@ class Sulfum extends Loot{
         this.ySize += 10;
         this.collisionSize = this.xSize * 1.1;
         this.texture.src = "textures/loot/sulfum.png";
-        this.value = Math.floor(this.xSize * 5 / 10) * 10;
+        this.value = Math.floor(this.xSize * 8 / 10) * 10;
     }
 
     takeLoot(player){

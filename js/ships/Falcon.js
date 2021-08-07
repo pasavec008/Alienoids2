@@ -1,4 +1,4 @@
-class PlayerShip{
+class Falcon{
     ySize = 70;
     xSize = this.ySize;
     x;  //sets during lvl creation
@@ -8,20 +8,25 @@ class PlayerShip{
     dy = 0;
     rotation = 0;
     rotationRadians;
-    rotationSpeed = 2;
-    speed = 0.07;
+    rotationSpeedO = 1.5;
+    speedO = 0.04;
+    consumptionO = 0.05;
+    rotationSpeed;
+    speed;
     passiveSlowSpeed = 50;
 
     animation = 0.95;
     maxHealth = 1000;
-    maxShield = 500;
+    shieldBaseUnit = 500;
+    maxShield;
     collisionDamage;
-    health = this.maxHealth;
-    shield = this.maxShield;
+    health;
+    shield;
     shieldAbsorption = 0.7;
+    
     shieldSize = 90;
     shieldOffset = (this.shieldSize - this.ySize) / 2;
-    hitTimer = 100;
+    hitTimer = 500;
     activeShieldTextureTimer = 0;
     activeShieldTexture = 0;
 
@@ -39,28 +44,58 @@ class PlayerShip{
     texture = new Image();
     texture_shield = new Image();
 
-    constructor(spaceshipID){
-        this.texture.src = "textures/spaceships/" + spaceshipID + ".png";
-        this.texture_shield.src = "textures/spaceships/shield" + spaceshipID + ".png";
+    constructor(){
+        this.texture.src = "textures/spaceships/0.png";
+        this.texture_shield.src = "textures/spaceships/shield0.png";
 
         //frames
-        if(spaceshipID == 0){
-            for(var i = 0; i < 3; i++){
-                this.primaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.primaryFrameBaseY, 2, -35 + 35 * i, 90))
-            }
-            for(var i = 0; i < 1; i++){
-                this.secondaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.secondaryFrameBaseY, 3, 0, 90))
-            }
-            for(var i = 0; i < 3; i++){
-                this.avionicsFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.avionicsFrameBaseY, 4, 0, 90))
-            }
-            for(var i = 0; i < 2; i++){
-                this.shieldFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.shieldFrameBaseY, 5, 0, 90))
-            }
+        for(var i = 0; i < 3; i++){
+            this.primaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.primaryFrameBaseY, 2, -35 + 35 * i, 90))
+        }
+        for(var i = 0; i < 1; i++){
+            this.secondaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.secondaryFrameBaseY, 3, 0, 90))
+        }
+        for(var i = 0; i < 3; i++){
+            this.avionicsFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.avionicsFrameBaseY, 4, 0, 90))
+        }
+        for(var i = 0; i < 2; i++){
+            this.shieldFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.shieldFrameBaseY, 5, 0, 90))
         }
 
         this.primaryFrames[1].item = new LaserGun();
         this.secondaryFrames[0].item = new Rocket();
+
+        this.avionicsFrames[0].item = new SimpleEngine();
+        this.avionicsFrames[1].item = new RotationMechanism();
+
+        this.shieldFrames[0].item = new SimpleShieldBattery();
+    }
+
+    init(){
+        this.x = 1920 / 2 - this.xSize / 2;
+        this.y = 1080 * 0.85 / 2 - this.ySize / 2;
+
+        this.health = this.maxHealth;
+        this.shield = this.maxShield;
+        this.dx = 0;
+        this.dy = 0;
+        this.rotation = 0;
+
+        this.rotationSpeed = this.rotationSpeedO;
+        this.speed = this.speedO;
+        this.consumption = this.consumptionO;
+
+        for(var i = 0; i < this.avionicsFrames.length; i++){
+            if(this.avionicsFrames[i].item != 0)
+                this.avionicsFrames[i].item.enhance(this);
+        }
+
+        this.maxShield = 0;
+        for(var i = 0; i < this.shieldFrames.length; i++){
+            if(this.shieldFrames[i].item != 0)
+                this.shieldFrames[i].item.enhance(this);
+        }
+        this.shield = this.maxShield;
     }
 
     takeDamage(collidedObject){
@@ -110,6 +145,7 @@ class PlayerShip{
             this.dy -= this.dy/this.passiveSlowSpeed;
         else if(this.dy < 0)
             this.dy -= this.dy/this.passiveSlowSpeed;
+
         
         if(controller.keys[37]) //left
             this.rotation -= this.rotationSpeed;
@@ -126,7 +162,7 @@ class PlayerShip{
             else
                 this.animation--;
 
-            model.player.sulfum -= 0.1;
+            model.player.sulfum -= this.consumption;
             if(model.player.sulfum < 0)
                 model.player.sulfum = 0;
 

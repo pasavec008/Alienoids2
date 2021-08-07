@@ -31,6 +31,9 @@ class Shop{
         this.shopFrames[0].item = new LaserGun();
         this.shopFrames[1].item = new MiningBeam();
         this.shopFrames[21].item = new Rocket();
+        this.shopFrames[42].item = new SimpleEngine();
+        this.shopFrames[43].item = new RotationMechanism();
+        this.shopFrames[49].item = new SimpleShieldBattery();
         this.player = player;
     }
 

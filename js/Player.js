@@ -1,9 +1,9 @@
 class Player{
     activePlayerShip = 0;
-    playerShip = [new PlayerShip(0)];
+    playerShip = [new Falcon()];
     storageFrames = [];
     sulfum = 2500;
-    titanium = 500;
+    titanium = 0;
     ice = 0;
     algae = 0;
     maxLevel = 1;

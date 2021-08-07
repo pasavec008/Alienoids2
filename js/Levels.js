@@ -12,14 +12,7 @@ class Levels{
         model.projectiles = [];
         model.loot = [];
 
-        model.player.playerShip[model.player.activePlayerShip].x = 1920 / 2 - model.player.playerShip[model.player.activePlayerShip].xSize / 2;
-        model.player.playerShip[model.player.activePlayerShip].y = 1080 * 0.85 / 2 - model.player.playerShip[model.player.activePlayerShip].ySize / 2;
-
-        model.player.playerShip[model.player.activePlayerShip].health = model.player.playerShip[model.player.activePlayerShip].maxHealth;
-        model.player.playerShip[model.player.activePlayerShip].shield = model.player.playerShip[model.player.activePlayerShip].maxShield;
-        model.player.playerShip[model.player.activePlayerShip].dx = 0;
-        model.player.playerShip[model.player.activePlayerShip].dy = 0;
-        model.player.playerShip[model.player.activePlayerShip].rotation = 0;
+        model.player.playerShip[model.player.activePlayerShip].init();
     }
 
     createLevel1(model){

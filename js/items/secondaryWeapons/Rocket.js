@@ -20,7 +20,7 @@ class Rocket extends SecondaryWeapon{
     constructor(){
         super();
         this.texture.src = "textures/shop/items/2_1.png";
-        this.toolTipTexture.src = "textures/shop/items/toolTip2_1.png";
+        this.toolTipTexture.src = "textures/shop/items/2_1TT.png";
     }
 
     shoot(model, booleanShoot, rotationOffset, playerShip){

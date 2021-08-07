@@ -20,7 +20,7 @@ class LaserGun extends PrimaryWeapon{
     constructor(){
         super();
         this.texture.src = "textures/shop/items/1_1.png";
-        this.toolTipTexture.src = "textures/shop/items/toolTip1_1.png";
+        this.toolTipTexture.src = "textures/shop/items/1_1TT.png";
     }
 
     shoot(model, booleanShoot, rotationOffset){
