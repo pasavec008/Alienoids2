@@ -9,8 +9,8 @@ class Falcon{
     rotation = 0;
     rotationRadians;
     rotationSpeedO = 1.5;
-    speedO = 0.04;
-    consumptionO = 0.05;
+    speedO = 0.05;
+    consumptionO = 0.1;
     rotationSpeed;
     speed;
     passiveSlowSpeed = 50;
@@ -27,6 +27,7 @@ class Falcon{
     shieldSize = 90;
     shieldOffset = (this.shieldSize - this.ySize) / 2;
     hitTimer = 500;
+    shieldRegenTime;
     activeShieldTextureTimer = 0;
     activeShieldTexture = 0;
 
@@ -92,6 +93,7 @@ class Falcon{
 
         this.maxShield = 0;
         this.shieldAbsorption = 0;
+        this.shieldRegenTime = 0;
         var numberOfShields = 0;
         for(var i = 0; i < this.shieldFrames.length; i++){
             if(this.shieldFrames[i].item != 0){
@@ -101,6 +103,7 @@ class Falcon{
         }
         this.shield = this.maxShield;
         this.shieldAbsorption /= numberOfShields;
+        this.shieldRegenTime /= numberOfShields;
     }
 
     takeDamage(collidedObject){
@@ -126,7 +129,7 @@ class Falcon{
         this.collisionDamage = this.health + this.shield;
         
         this.hitTimer++;
-        if(this.hitTimer > 500 && this.shield < this.maxShield){
+        if(this.hitTimer > this.shieldRegenTime && this.shield < this.maxShield){
             this.activeShieldTextureTimer = 1;
             this.shield += this.maxShield / 500;
             if(this.shield > this.maxShield)

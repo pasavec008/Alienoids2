@@ -2,11 +2,11 @@ class Player{
     activePlayerShip = 0;
     playerShip = [new Falcon()];
     storageFrames = [];
-    sulfum = 2500;
-    titanium = 0;
-    ice = 0;
-    algae = 0;
-    maxLevel = 1;
+    sulfum = 250000;
+    titanium = 250000;
+    ice = 250000;
+    algae = 250000;
+    maxLevel = 3;
 
     xSizeNumber = 25;
     ySizeNumber = 25;

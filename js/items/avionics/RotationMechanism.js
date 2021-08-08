@@ -3,14 +3,12 @@ class RotationMechanism extends Avionic{
     construction = "new RotationMechanism();";
     price = [2000, 0, 0, 0];
 
+    rotationSpeed = 0.2;
+    consumption = 0.15;
+
     constructor(){
         super();
         this.texture.src = "textures/shop/items/3_2.png";
         this.toolTipTexture.src = "textures/shop/items/3_2TT.png";
-    }
-
-    enhance(ship){
-        ship.rotationSpeed *= 1.2;
-        ship.consumption *= 1.15;
     }
 }
