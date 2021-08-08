@@ -35,6 +35,8 @@ class Shop{
         this.shopFrames[43].item = new RotationMechanism();
         this.shopFrames[44].item = new ReinforcedEngine();
         this.shopFrames[45].item = new ReinforcedRotationMechanism();
+        this.shopFrames[46].item = new CombatEngine();
+        this.shopFrames[47].item = new CombinedBioEngine();
         this.shopFrames[48].item = new StellarEngine();
         this.shopFrames[49].item = new SimpleShieldBattery();
         this.shopFrames[50].item = new DualCoreBattery();
