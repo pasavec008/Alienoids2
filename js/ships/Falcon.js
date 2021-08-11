@@ -261,6 +261,6 @@ class Falcon{
             context.drawImage(this.texture_shield, this.activeShieldTexture * 230, 0, 230, 230, 0 - this.xSize / 2 - this.shieldOffset, 0 - this.ySize / 2 - this.shieldOffset, this.shieldSize, this.shieldSize);
         context.restore();
         if(this.burn)
-            context.drawImage(this.texture_burn, Math.floor((this.burn % 45 / 15)) * 230, 0, 230, 230, this.x + this.xSize / 2 - 45, this.y + this.ySize / 2 - 45, this.shieldSize, this.shieldSize);
+            context.drawImage(this.texture_burn, Math.floor((this.burn % 30 / 10)) * 230, 0, 230, 230, this.x + this.xSize / 2 - 45, this.y + this.ySize / 2 - 45, this.shieldSize, this.shieldSize);
     }
 }

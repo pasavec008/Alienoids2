@@ -55,7 +55,7 @@ class Sulfid extends Enemy{
     }
 
     specialEffectOnShip(playerShip){
-        playerShip.burn = 500;
+        playerShip.burn = 300;
     }
 
     shouldBeAngry(model){
@@ -70,13 +70,13 @@ class Sulfid extends Enemy{
         }
         else{
             if(model.playerShip.x > this.x && this.dx < 2)
-                this.dx += 0.05;
+                this.dx += 0.04;
             if(model.playerShip.x < this.x && this.dx > -2)
-                this.dx -= 0.05;
+                this.dx -= 0.04;
             if(model.playerShip.y > this.y && this.dy < 2)
-                this.dy += 0.05;
+                this.dy += 0.04;
             if(model.playerShip.y < this.y && this.dy > -2)
-                this.dy -= 0.05;
+                this.dy -= 0.04;
         }
 
         if(this.expand){
