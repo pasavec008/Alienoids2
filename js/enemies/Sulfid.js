@@ -117,4 +117,12 @@ class Sulfid extends Enemy{
         else if(this.rotation < 0)
             this.rotation += 360;
     }
+
+    draw(context){
+        context.save();
+        context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
+        context.rotate(this.rotation * Math.PI / 180.0);
+        context.drawImage(this.texture, 0 + 50 * this.angry, 0, 50, 50, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
+        context.restore();
+    }
 }
