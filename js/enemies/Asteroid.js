@@ -69,7 +69,7 @@ class Asteroid extends Enemy{
     takeDamage(collidedObject){
         var modifier = 1;
         if(collidedObject.special == 1){
-            modifier = 7;
+            modifier = 5;
             this.dx /= 1.02;
             this.dy /= 1.02;
             this.rotationSpeed /= 1.03;

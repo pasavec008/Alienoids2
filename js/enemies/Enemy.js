@@ -8,6 +8,7 @@ class Enemy{
     health;
     collisionDamage;
     lastDamage;
+    special = 0;
 
     constructor(){
         this.lastDamage = 200;

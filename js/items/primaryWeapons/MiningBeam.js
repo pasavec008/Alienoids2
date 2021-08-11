@@ -13,7 +13,7 @@ class MiningBeam extends PrimaryWeapon{
     health = 1;
 
     cooldownTimer = 0;
-    cooldown = 1;
+    cooldown = 2;
 
     construction = "new MiningBeam();";
     price = [3000, 0, 0, 0];

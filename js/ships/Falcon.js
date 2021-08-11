@@ -1,4 +1,5 @@
 class Falcon{
+    shipID = 1;
     ySize = 70;
     xSize = this.ySize;
     x;  //sets during lvl creation
@@ -31,6 +32,8 @@ class Falcon{
     activeShieldTextureTimer = 0;
     activeShieldTexture = 0;
 
+    burn = 0; //in ticks
+
     primaryFrames = [];
     secondaryFrames = [];
     avionicsFrames = [];
@@ -44,10 +47,12 @@ class Falcon{
 
     texture = new Image();
     texture_shield = new Image();
+    texture_burn = new Image();
 
     constructor(){
         this.texture.src = "textures/spaceships/0.png";
         this.texture_shield.src = "textures/spaceships/shield0.png";
+        this.texture_burn.src = "textures/spaceships/burn0.png";
 
         //frames
         for(var i = 0; i < 3; i++){
@@ -104,6 +109,8 @@ class Falcon{
         this.shield = this.maxShield;
         this.shieldAbsorption /= numberOfShields;
         this.shieldRegenTime /= numberOfShields;
+
+        this.burn = 0;
     }
 
     takeDamage(collidedObject){
@@ -120,9 +127,35 @@ class Falcon{
         }
 
         this.health -= shipDamage;
+
+        if(collidedObject.special)
+            collidedObject.specialEffectOnShip(this);
+    }
+
+    takeFlatDamage(howMuch){
+        this.hitTimer = 0;
+        this.activeShieldTextureTimer = 10;
+        var shieldDamage = howMuch * this.shieldAbsorption;
+        var shipDamage = howMuch - shieldDamage;
+        this.shield -= shieldDamage;
+
+        if(this.shield <= 0){
+            shipDamage -= this.shield;
+            this.shield = 0;
+        }
+
+        this.health -= shipDamage;
     }
 
     change(controller, model){
+        //burn
+        if(this.burn > 0){
+            this.burn--;
+            if(model.player.sulfum > this.consumptionO * 5)
+                model.player.sulfum -= this.consumptionO * 5;
+            this.takeFlatDamage(this.maxHealth / 1000);
+        }
+
         if(this.health <= 0)
             return;
 
@@ -189,9 +222,9 @@ class Falcon{
 
         //edges of map
         if(this.x < 0 || this.x + this.xSize > 1920)
-            this.dx *= -1.25;
+            this.dx *= -1.1;
         if(this.y < 0 || this.y + this.ySize > 1080 * 0.85)
-            this.dy *= -1.25;
+            this.dy *= -1.1;
 
         //primary weapons
         var tempBoolean = 0;
@@ -227,5 +260,7 @@ class Falcon{
         if(this.shield)
             context.drawImage(this.texture_shield, this.activeShieldTexture * 230, 0, 230, 230, 0 - this.xSize / 2 - this.shieldOffset, 0 - this.ySize / 2 - this.shieldOffset, this.shieldSize, this.shieldSize);
         context.restore();
+        if(this.burn)
+            context.drawImage(this.texture_burn, Math.floor((this.burn % 45 / 15)) * 230, 0, 230, 230, this.x + this.xSize / 2 - 45, this.y + this.ySize / 2 - 45, this.shieldSize, this.shieldSize);
     }
 }

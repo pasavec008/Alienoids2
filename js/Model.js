@@ -27,13 +27,17 @@ class Model{
         this.levelChoice = new LevelChoice(this.player, this.levels);
     }
 
-    collision(object1, object2){
+    distance(object1, object2){
         var centre1X = object1.x + object1.xSize / 2;
         var centre1Y = object1.y + object1.ySize / 2;
         var centre2X = object2.x + object2.xSize / 2;
         var centre2Y = object2.y + object2.ySize / 2;
 
-        var distance = Math.sqrt((centre1X - centre2X) * (centre1X - centre2X) + (centre1Y - centre2Y) * (centre1Y - centre2Y));
+        return Math.sqrt((centre1X - centre2X) * (centre1X - centre2X) + (centre1Y - centre2Y) * (centre1Y - centre2Y));
+    }
+
+    collision(object1, object2){
+        var distance = this.distance(object1, object2);
     
         if(distance <= object1.collisionSize / 2 + object2.collisionSize / 2)
             return 1;
