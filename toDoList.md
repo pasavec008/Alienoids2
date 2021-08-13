@@ -1,4 +1,5 @@
 # TOP priority
+- sulfid burn bugged when ship has no shields
 
 # High priority
 
@@ -13,6 +14,8 @@
 - upgrade asteroids textures
 
 - draw fire with fire object so anything can be set on fire? or separate burn methods in every enemy
+
+- give sulfids angry status after taking damage (or at 50% hp?)
 
 
 

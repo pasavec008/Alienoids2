@@ -151,8 +151,8 @@ class Falcon{
         //burn
         if(this.burn > 0){
             this.burn--;
-            if(model.player.sulfum > this.consumptionO * 5)
-                model.player.sulfum -= this.consumptionO * 5;
+            if(model.player.sulfum > this.consumptionO * 10)
+                model.player.sulfum -= this.consumptionO * 10;
             this.takeFlatDamage(this.maxHealth / 1000);
         }
 
