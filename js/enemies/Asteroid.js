@@ -67,6 +67,8 @@ class Asteroid extends Enemy{
     }
 
     takeDamage(collidedObject){
+        if(typeof collidedObject.specialEffectOnEnemy == "function")
+            collidedObject.specialEffectOnEnemy(this);
         var modifier = 1;
         if(collidedObject.special == 1){
             modifier = 5;
@@ -79,6 +81,11 @@ class Asteroid extends Enemy{
     }
 
     change(controller, model){
+        this.burnTextureTimer++;
+        if(this.burnTextureTimer > 900000)
+            this.burnTextureTimer = 0;
+        if(this.burn > 0)
+            this.burnDamage();
         this.x += this.dx;
         this.y += this.dy;
         this.lastDamage++;
@@ -109,5 +116,8 @@ class Asteroid extends Enemy{
         context.rotate(this.rotation * Math.PI / 180.0);
         context.drawImage(this.texture, 750 * this.type + 250 * this.textureType, 0 + 250 * (3 - this.howDamaged), 250, 250, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
         context.restore();
+
+        if(this.burn > 0)
+            context.drawImage(this.texture_burn, Math.floor((this.burnTextureTimer % 30 / 10)) * 230, 0, 230, 230, this.x - 20, this.y - 20, this.xSize + 40, this.ySize + 40);
     }
 }

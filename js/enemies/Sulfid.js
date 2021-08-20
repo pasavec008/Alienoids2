@@ -43,6 +43,8 @@ class Sulfid extends Enemy{
     }
 
     takeDamage(collidedObject){
+        if(typeof collidedObject.specialEffectOnEnemy == "function")
+            collidedObject.specialEffectOnEnemy(this);
         if(collidedObject.shipID != undefined)
             this.destroyedByShip = 1;
         this.health -= collidedObject.collisionDamage;
@@ -64,6 +66,8 @@ class Sulfid extends Enemy{
     }
 
     change(controller, model){
+        //cannot be burned
+
         if(!this.angry){
             if(this.tick % 10 == 0)
                 this.shouldBeAngry(model);

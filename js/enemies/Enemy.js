@@ -9,12 +9,18 @@ class Enemy{
     collisionDamage;
     lastDamage;
     special = 0;
+    burn = 0;
+    burnTextureTimer = 0;
+    texture_burn = new Image();
 
     constructor(){
+        this.texture_burn.src = "textures/enemies/burn.png";
         this.lastDamage = 200;
     }
 
     takeDamage(collidedObject){
+        if(typeof collidedObject.specialEffectOnEnemy == "function")
+            collidedObject.specialEffectOnEnemy(this);
         this.health -= collidedObject.collisionDamage;
         this.lastDamage = 0;
     }
@@ -35,11 +41,19 @@ class Enemy{
         }
     }
 
+    burnDamage(){
+        this.burn--;
+        this.health -= 0.2 + this.maxHealth / 5000;
+        this.lastDamage = 0;
+    }
+
     draw(context){
         context.save();
         context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
         context.rotate(this.rotation * Math.PI / 180.0);
         context.drawImage(this.texture, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
         context.restore();
+        if(this.burn)
+            context.drawImage(this.texture_burn, Math.floor((this.burn % 30 / 10)) * 230, 0, 230, 230, this.x + this.xSize / 2 - 45, this.y + this.ySize / 2 - 45, this.xSize + 90, this.ySize + 90);
     }
 }
