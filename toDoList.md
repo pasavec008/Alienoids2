@@ -28,6 +28,8 @@
 
 - flamethrower
 
+- freezzing laser (white) which slows
+
 
 
 # Done

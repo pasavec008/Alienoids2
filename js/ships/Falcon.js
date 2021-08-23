@@ -39,11 +39,11 @@ class Falcon{
     avionicsFrames = [];
     shieldFrames = [];
     frameConstantX = 150;
-    frameConstantChangeX = 110;
-    primaryFrameBaseY = 195;
-    secondaryFrameBaseY = 345;
-    avionicsFrameBaseY = 495;
-    shieldFrameBaseY = 645;
+    frameConstantChangeX = 55;
+    primaryFrameBaseY = 190;
+    secondaryFrameBaseY = 350;
+    avionicsFrameBaseY = 510;
+    shieldFrameBaseY = 670;
 
     texture = new Image();
     texture_shield = new Image();
@@ -56,16 +56,16 @@ class Falcon{
 
         //frames
         for(var i = 0; i < 3; i++){
-            this.primaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.primaryFrameBaseY, 2, -35 + 35 * i, 90))
+            this.primaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.primaryFrameBaseY, 2, -35 + 35 * i, 50));
         }
         for(var i = 0; i < 1; i++){
-            this.secondaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.secondaryFrameBaseY, 3, 0, 90))
+            this.secondaryFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.secondaryFrameBaseY, 3, 0, 50));
         }
         for(var i = 0; i < 3; i++){
-            this.avionicsFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.avionicsFrameBaseY, 4, 0, 90))
+            this.avionicsFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.avionicsFrameBaseY, 4, 0, 50));
         }
         for(var i = 0; i < 2; i++){
-            this.shieldFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.shieldFrameBaseY, 5, 0, 90))
+            this.shieldFrames.push(new Frame(this.frameConstantX + i * this.frameConstantChangeX, this.shieldFrameBaseY, 5, 0, 50));
         }
 
         this.primaryFrames[1].item = new LaserGun();

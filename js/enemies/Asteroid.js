@@ -86,8 +86,11 @@ class Asteroid extends Enemy{
             this.burnTextureTimer = 0;
         if(this.burn > 0)
             this.burnDamage();
-        this.x += this.dx;
-        this.y += this.dy;
+
+        if(this.frost > 0)
+            this.frost--;
+        this.x += this.dx * Math.pow(0.997, this.frost);
+        this.y += this.dy * Math.pow(0.997, this.frost);
         this.lastDamage++;
 
         if(this.x > 1920)

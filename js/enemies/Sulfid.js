@@ -2,7 +2,7 @@ class Sulfid extends Enemy{
     texture = new Image();
     x;
     y;
-    size = 50;
+    size = 75;
     ySize = this.size;
     xSize = this.ySize;
     collisionSize = this.xSize * 0.9;
@@ -52,22 +52,27 @@ class Sulfid extends Enemy{
     }
 
     death(model){
+        this.rotationSpeed /= 5;
         if(!this.destroyedByShip)
             model.loot.push(new Sulfum(this, 500));
     }
 
     specialEffectOnShip(playerShip){
-        playerShip.burn = 300;
+        playerShip.burn += 300;
     }
 
     shouldBeAngry(model){
-        if(model.distance(model.playerShip, this) < 350)
+        if(model.distance(model.playerShip, this) < 350){
             this.angry = 1;
+            this.rotationSpeed *= 5;
+        }
+            
     }
 
     change(controller, model){
         //cannot be burned
 
+        this.tick++;
         if(!this.angry){
             if(this.tick % 10 == 0)
                 this.shouldBeAngry(model);
@@ -83,25 +88,11 @@ class Sulfid extends Enemy{
                 this.dy -= 0.04;
         }
 
-        if(this.expand){
-            this.xSize += 0.1;
-            this.ySize += 0.1;
-            this.tick++;
-            if(this.tick > 200)
-                this.expand = 0;
-        }
-        else{
-            this.xSize -= 0.1;
-            this.ySize -= 0.1;
-            this.tick--;
-            if(this.tick < 0)
-                this.expand = 1;
-        }
+        if(this.frost > 0)
+            this.frost--;
 
-        this.collisionSize = this.xSize * 0.9;
-
-        this.x += this.dx;
-        this.y += this.dy;
+        this.x += this.dx * Math.pow(0.999, this.frost);
+        this.y += this.dy * Math.pow(0.999, this.frost);
         this.lastDamage++;
 
         if(this.x > 1920)
@@ -126,7 +117,7 @@ class Sulfid extends Enemy{
         context.save();
         context.translate(this.x + this.xSize / 2, this.y + this.ySize / 2);
         context.rotate(this.rotation * Math.PI / 180.0);
-        context.drawImage(this.texture, 0 + 50 * this.angry, 0, 50, 50, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
+        context.drawImage(this.texture, 0 - this.xSize / 2, 0 - this.ySize / 2, this.xSize, this.ySize);
         context.restore();
     }
 }

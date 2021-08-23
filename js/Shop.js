@@ -5,12 +5,12 @@ class Shop{
     shopFrames = [];
 
     shopFrameBaseX = 850;
-    shopFrameBaseY = 195;
-    shopFrameChangeX = 60;
+    shopFrameBaseY = 190;
+    shopFrameChangeX = 55;
 
     shipFrameBaseX = 150;
-    shipFrameBaseY = 795;
-    shipFrameChangeX = 110;
+    shipFrameBaseY = 830;
+    shipFrameChangeX = 55;
     player;
     levelButton = new Button(1570, 830, 200, 100, "textures/shop/button.png");
     buyButton = new Button(840, 830, 200, 100, "textures/shop/buy.png");
@@ -20,9 +20,11 @@ class Shop{
     constructor(player){
         this.texture.src = "textures/shop/1.png";
         for(var i = 0; i < 3; i++){
-            this.shipFrames.push(new Frame(this.shipFrameBaseX + i * this.shipFrameChangeX, this.shipFrameBaseY, 1, 0, 90));
+            this.shipFrames.push(new Frame(this.shipFrameBaseX + i * this.shipFrameChangeX, this.shipFrameBaseY, 1, 0, 50));
         }
         for(var i = 0; i < 8; i++){
+            if(i == 3 || i > 5)
+                this.shopFrameBaseY += 10;
             for(var j = 0; j < 7; j++){
                 this.shopFrames.push(new Frame(this.shopFrameBaseX + j * this.shopFrameChangeX, this.shopFrameBaseY + i * this.shopFrameChangeX, 7, 0, 50, "new LaserGun();"));
             }
@@ -31,6 +33,10 @@ class Shop{
         this.shopFrames[0].item = new LaserGun();
         this.shopFrames[1].item = new MiningBeam();
         this.shopFrames[2].item = new Flamethrower();
+        this.shopFrames[3].item = new NitrogenLaserGun();
+
+        this.shopFrames[19].item = new AdvancedMiningBeam();
+        this.shopFrames[20].item = new Napalm();
 
 
         this.shopFrames[21].item = new Rocket();

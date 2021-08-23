@@ -16,7 +16,7 @@ class Flamethrower extends PrimaryWeapon{
     cooldown = 2;
 
     construction = "new Flamethrower();";
-    price = [5000, 0, 150, 0];
+    price = [6000, 0, 0, 0];
 
     constructor(){
         super();

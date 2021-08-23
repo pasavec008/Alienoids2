@@ -10,6 +10,8 @@ class Enemy{
     lastDamage;
     special = 0;
     burn = 0;
+    frost = 0;
+    frostSpeed = 0;
     burnTextureTimer = 0;
     texture_burn = new Image();
 

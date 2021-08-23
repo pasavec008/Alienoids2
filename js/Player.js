@@ -6,7 +6,7 @@ class Player{
     titanium = 250000;
     ice = 250000;
     algae = 250000;
-    maxLevel = 1;
+    maxLevel = 4;
 
     xSizeNumber = 25;
     ySizeNumber = 25;
@@ -17,9 +17,9 @@ class Player{
     numbersGreen = new Image();
 
     frameConstantX = 1345;
-    frameConstantChangeX = 60;
+    frameConstantChangeX = 55;
     frameConstantY = 195;
-    frameConstantChangeY = 60;
+    frameConstantChangeY = 55;
 
     constructor(){
         this.numbersYellow.src = "textures/hud/numbersYellow.png";
@@ -28,7 +28,7 @@ class Player{
         this.numbersGreen.src = "textures/hud/numbersGreen.png";
 
         for(var i = 0; i < 8; i++){
-            for(var j = 0; j < 7; j++){
+            for(var j = 0; j < 8; j++){
                 this.storageFrames.push(new Frame(this.frameConstantX + j * this.frameConstantChangeX, this.frameConstantY + i * this.frameConstantChangeY, 6, 0, 50));
             }
         }

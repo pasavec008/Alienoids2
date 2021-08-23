@@ -13,7 +13,6 @@ class FlameShot{
     dy;
     rotation;
     special;
-    burnPotential = 7;
 
     animation = 0;
     animationFrame = 0;
@@ -36,11 +35,8 @@ class FlameShot{
     }
 
     specialEffectOnEnemy(hitObject){
-        if(hitObject.burn < 30)
-            hitObject.burn += 30;
-        else
-            hitObject.burn += this.burnPotential;
-        this.burnPotential = 0;
+        if(hitObject.burn < 180)
+            hitObject.burn = 180;
     }
 
     change(controller, model){
