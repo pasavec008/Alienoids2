@@ -30,6 +30,8 @@
 
 - freezzing laser (white) which slows
 
+- meteor enemy, trail from flame texture behind it .. increasing speed and collision damage over time
+
 
 
 # Done
